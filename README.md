@@ -1,1 +1,1 @@
-# Fairy
+# Fairy: your fairs management system
