@@ -1,5 +1,34 @@
-#root {
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body.dark {
+  --bg-color: #1a1a1a;
+  --footer-bg: #242424;
+  --text-color: #f3e6e6;
+  --nav-bg: #242424;
+}
+body.light {
+  --bg-color: rgb(244, 236, 236);
+  --footer-bg: rgb(243, 230, 230);
+  --text-color: rgb(39, 38, 38);
+  --nav-bg: rgb(243, 230, 230);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  margin: 0;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:80%;
 }

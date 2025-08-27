@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react"
 import { SignUpUser } from "../services/auth"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 import validator from "validator"
 
 import "../../public/styleSheets/auth.css"
 
-const SignUp = ({ setShowSignUp }) => {
+const SignUp = () => {
   let navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState("")
-
+  const location = useLocation()
+  const roleFromState = location.state?.role || "Attendee"
+  
   const [countries, setCountries] = useState([])
   const [selectedCode, setSelectedCode] = useState("+973")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const initialState = {
     name: "",
     email: "",
     phone: "",
-    role: "",
+    role: roleFromState,
     password: "",
     confirmPassword: "",
   }
@@ -62,31 +64,32 @@ const SignUp = ({ setShowSignUp }) => {
     }
   }
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const res = await axios.get("https://restcountries.com/v3.1/all")
-        const data = await res.json()
+useEffect(() => {
+  const fetchCountries = async () => {
+    try {
+      const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,idd")
+      const data = res.data
 
-        const formatted = data
-          .map((country) => {
-            const code = country.idd?.root + (country.idd?.suffixes?.[0] || "")
-            return {
-              name: country.name.common,
-              code: code || null,
-            }
-          })
-          .filter((c) => c.code)
-          .sort((a, b) => a.name.localeCompare(b.name))
+      const formatted = data
+        .map((country) => {
+          const code = country.idd?.root + (country.idd?.suffixes?.[0] || "")
+          return {
+            name: country.name.common,
+            code: code || null,
+          }
+        })
+        .filter((c) => c.code)
+        .sort((a, b) => a.name.localeCompare(b.name))
 
-        setCountries(formatted)
-      } catch (err) {
-        console.error("Failed to load country codes", err)
-      }
+      setCountries(formatted)
+    } catch (err) {
+      console.error("Failed to load country codes", err)
     }
+  }
 
-    fetchCountries()
-  }, [])
+  fetchCountries()
+}, [])
+
 
   return (
     <div className="wrapper">
@@ -119,14 +122,14 @@ const SignUp = ({ setShowSignUp }) => {
           />
           <label htmlFor="phoneNumber">Phone Number</label>
           <div className="phone-input-wrapper">
-            <select
+            <select className="phone-code"
               value={selectedCode}
               onChange={(e) => setSelectedCode(e.target.value)}
               required
             >
               {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                  +{country.code}
+                <option key={`${country.name}-${country.code}`} value={country.code}>
+                  {country.code}
                 </option>
               ))}
             </select>
@@ -193,14 +196,14 @@ const SignUp = ({ setShowSignUp }) => {
             Sign Up
           </button>
         </form>
-          {errorMessage && <span className="error">{errorMessage}</span>}
+        {errorMessage && <span className="error">{errorMessage}</span>}
 
-        <p id="switch">
+        <p id="otherAuth">
           Already have an account?{" "}
           <button
             type="button"
             className="switch"
-            onClick={() => setShowSignUp(false)}
+            onClick={() => navigate("/auth/sign-in")}
           >
             Sign In
           </button>

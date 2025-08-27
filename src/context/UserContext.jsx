@@ -6,10 +6,16 @@ const UserContext = createContext()
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
-  const checkToken = async () => {
+const checkToken = async () => {
+  try {
     const userData = await CheckSession()
     setUser(userData)
+  } catch (err) {
+    console.error("Invalid token:", err.message)
+    localStorage.removeItem("token") 
+    setUser(null)
   }
+}
 
   const handleLogOut = () => {
     setUser(null)

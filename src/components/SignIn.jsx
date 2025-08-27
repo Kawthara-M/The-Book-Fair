@@ -1,13 +1,14 @@
 import { useState } from "react"
-import { SignInUser } from "../services/Auth"
-import { useNavigate } from "react-router-dom"
+import { SignInUser } from "../services/auth"
 import { useUser } from "../context/UserContext"
+import { useNavigate } from "react-router-dom"
 
 import "../../public/stylesheets/auth.css"
 
-const SignIn = ({ setShowSignUp }) => {
-  const { setUser } = useUser() 
+const SignIn = () => {
+  const { user, setUser } = useUser()
   let navigate = useNavigate()
+
   const initialState = { email: "", password: "" }
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -26,6 +27,7 @@ const SignIn = ({ setShowSignUp }) => {
       if (payload && payload.id) {
         setFormValues(initialState)
         setUser(payload)
+       // console.log(user)
         navigate("/Home")
       }
     } catch (error) {
@@ -36,7 +38,7 @@ const SignIn = ({ setShowSignUp }) => {
   return (
     <div className="wrapper">
       <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="sign-in">
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -63,18 +65,18 @@ const SignIn = ({ setShowSignUp }) => {
             value={formValues.password}
             required
           />
-          {errorMessage === "" ? null : <span>{errorMessage}</span>}
+          {errorMessage === "" ? null : <span className="error">{errorMessage}</span>}
         </div>
         <button disabled={!formValues.email || !formValues.password}>
           Sign In
         </button>
       </form>
-      <p id="switch">
+      <p id="otherAuth">
         Don't have an Account?
         <button
           className="switch"
           type="button"
-          onClick={() => setShowSignUp(true)}
+          onClick={() => navigate("/auth/sign-up")}
         >
           Sign Up
         </button>
