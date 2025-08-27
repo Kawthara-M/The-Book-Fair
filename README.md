@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Fair-y
 **Date** Aug / 24 / 2025 <br>
 **Developed By**  [Kawthar Mohammad](https://github.com/Kawthara-M) ; **[LinkedIn](https://www.linkedin.com/in/kawthar-mohammad/)**
@@ -66,3 +67,6 @@ The following wireframes present a visual blueprint of the application's user in
 ---
 
 
+=======
+# Fairy: your fairs management system
+>>>>>>> 62927b907f4d8672b30dd9a7232a661fb6cf2e34
