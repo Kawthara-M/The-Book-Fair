@@ -1,12 +1,11 @@
-<<<<<<< HEAD
-# Fair-y
+# The Book Fair
 **Date** Aug / 24 / 2025 <br>
 **Developed By**  [Kawthar Mohammad](https://github.com/Kawthara-M) ; **[LinkedIn](https://www.linkedin.com/in/kawthar-mohammad/)**
 
 **Deployed Version:**
 
 ## 📌 Description
-Fair-y, a fairs management system developed to facilitate the process of managing fairs in terms of finding participants and offering tickets. The platform is built with MERN stack and has three interfaces, one for the admin to manage fairs, another for attendees to book tickets for active fairs, and the last for exhibitors who wish to participate in fairs.
+The Book Faie, a fairs management system developed to facilitate the process of managing book fairs in terms of finding participants and offering tickets. The platform is built with MERN stack and has three interfaces, one for the admin to manage fairs, another for attendees to book tickets for active fairs, and the last for exhibitors who wish to participate in fairs.
 
 ## 🚀 Getting Started
 
@@ -23,7 +22,7 @@ A first step for Fair-y project to see the light was planning, a critical stage 
 - **To Do List**: A board to list tasks and track prograss.
   | [Notion]() |
 
-- **Backend Repository**: A GitHub repository for Fair-y's backend | [gitHub](https://github.com/Kawthara-M/Fair-y-backend) |
+- **Backend Repository**: GitHub repository for The Book Fair backend | [gitHub](https://github.com/Kawthara-M/Fair-y-backend) |
 
 Following the planning, the development has mainly resulted in 2 main outcomes, a front-end and a backend developed and connected using the MERN Stack (MongoDB, Express, React, Node.js). <br>
 
@@ -46,6 +45,7 @@ The following wireframes present a visual blueprint of the application's user in
 
 - **Secure Payment Methods** : Fully functional checkout with secure gateways (credit/debit cards, Apple Pay, Benefit Pay).
 - **Multi-language Support** : Arabic and English interface.
+- **Sponsors Interface** : Garanting Access to sponsors who would like to fund a fair.
 
 ---
 
