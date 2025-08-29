@@ -7,6 +7,7 @@ import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import Home from "./pages/Home" 
 import Profile from "./pages/Profile" 
+import Fairs from "./pages/Fairs"
 import { useUser } from "./context/UserContext"
 import "./App.css"
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/auth/sign-in" element={<SignIn/>} />
           <Route path="/auth/sign-up" element={<SignUp/>} />
           <Route path="/about" element={<AboutUs/>} />
+          <Route path="/fairs" element={<Fairs/>} />
           <Route path={user ?`/profile/${user.id}`: '/auth'} element={user? <Profile/> : <Authentication />} />
         </Routes>
       </main>
