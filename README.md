@@ -35,8 +35,23 @@ Following the planning, the development has mainly resulted in 2 main outcomes, 
 
 ## 🗺️ Wireframes
 
-The following wireframes present a visual blueprint of the application's user interface and layout structure. Designed in a low-fidelity format, these wireframes focus on content placement and user interactions without incorporating final design elements such as colors, fonts, or images. <br>
-| [Wireframes]() |
+The following wireframes present the main visual blueprints of the application's user interface and layout structure. Designed in a low-fidelity format, these wireframes focus on content placement and user interactions without incorporating final design elements such as colors, fonts, or images. <br>
+
+
+### Home Preview
+ <img src="src/assets/Home.png" height="200px" alt="Home View">
+
+ ### Admin Add New Fair View
+ <img src="src/assets/new fair.png" height="200px" alt="Home View">
+
+### Attendee and Exhibitor Booking Views
+ <img src="src/assets/Book.png" height="200px" alt="Exhibitor Booking View">
+ <img src="src/assets/Tickets.png" height="200px" alt="Attendee Tickets View">
+
+ ### Attendee and Exhibitor Profile Views
+ <img src="src/assets/Profile Tickets.png" height="200px" alt="Attendee Profile View">
+ <img src="src/assets/Profile Books.png" height="200px" alt="Exhibitor Profile View">
+
 
 ---
 
@@ -57,7 +72,7 @@ The following wireframes present a visual blueprint of the application's user in
 #### **FrontEnd**
 
 - Password validator: [Geeks for geeks](https://www.geeksforgeeks.org/reactjs/create-a-password-validator-using-reactjs/)
-- Country Codes: [REST Countries](https://restcountries.com/)
+- Country Codes API: [REST Countries](https://restcountries.com/)
 
 #### **Styling**
 
