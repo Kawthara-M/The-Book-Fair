@@ -1,0 +1,33 @@
+.booking {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  margin:0;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-x {
+  font-size: 22px;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  line-height: 1;
+}
+
+.delete-x:hover {
+  color: red;
+  transform: scale(1.1);
+}

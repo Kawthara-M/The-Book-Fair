@@ -52,17 +52,17 @@ The following wireframes present a visual blueprint of the application's user in
 
 #### **BackEnd**
 
-- Search Functionality: [Medium Platform](https://medium.com/@aniagudo.godson/running-a-simple-search-query-on-mongodb-atlas-using-express-nodejs-2-refining-search-queries-49949ce5c4a1)
 - Password Validator: [npm package](https://www.npmjs.com/package/password-validator)
 
 #### **FrontEnd**
 
 - Password validator: [Geeks for geeks](https://www.geeksforgeeks.org/reactjs/create-a-password-validator-using-reactjs/)
+- Country Codes: [REST Countries](https://restcountries.com/)
 
 #### **Styling**
 
 - Icons: [Flaticon](https://www.flaticon.com/)
-- Loadings: [Css loaders]()
+- Loadings: [Css loaders](https://cssloaders.github.io/)
 ---
 
 

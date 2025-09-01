@@ -2,6 +2,7 @@ import { useState } from "react"
 import { SignInUser } from "../services/auth"
 import { useUser } from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
+import login from "../assets/login.jpg"
 
 import "../../public/stylesheets/auth.css"
 
@@ -27,7 +28,6 @@ const SignIn = () => {
       if (payload && payload.id) {
         setFormValues(initialState)
         setUser(payload)
-       // console.log(user)
         navigate("/Home")
       }
     } catch (error) {
@@ -36,51 +36,44 @@ const SignIn = () => {
   }
 
   return (
-    <div className="wrapper">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit} className="sign-in">
-        <div>
+    <div className="authentication-card">
+      <div className="illustration-panel">
+        <img src={`${login}`} alt="Book Fair" />
+      </div>
+      <div className="form-panel">
+        <h2>Welcome Back</h2>
+        <p>Fulfill your information to continue</p>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <input
-            onChange={handleChange}
+            type="text"
             id="email"
-            type="email"
             name="email"
-            placeholder="user@example.com"
             value={formValues.email}
+            onChange={handleChange}
+            placeholder="name@example.com"
             required
-            autoComplete="email"
           />
-        </div>
 
-        <div>
           <label htmlFor="password">Password</label>
+          {/* Changed type to password and fixed id */}
           <input
-            onChange={(e) => {
-              handleChange(e)
-            }}
             type="password"
             id="password"
             name="password"
             value={formValues.password}
+            onChange={handleChange}
+            placeholder="Your password"
             required
           />
-          {errorMessage === "" ? null : <span className="error">{errorMessage}</span>}
-        </div>
-        <button disabled={!formValues.email || !formValues.password}>
-          Sign In
-        </button>
-      </form>
-      <p id="otherAuth">
-        Don't have an Account?
-        <button
-          className="switch"
-          type="button"
-          onClick={() => navigate("/auth/sign-up")}
-        >
-          Sign Up
-        </button>
-      </p>
+          <p className="error">{errorMessage ? errorMessage : null}</p>
+
+          <button type="submit">Login</button>
+          <p onClick={() => navigate("/auth/")} className="switch">
+            Don't have an Account? <strong>Sign Up</strong>
+          </p>
+        </form>
+      </div>
     </div>
   )
 }

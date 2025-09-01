@@ -3,17 +3,19 @@ import { SignUpUser } from "../services/auth"
 import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 import validator from "validator"
+import login from "../assets/login.jpg"
 
 import "../../public/styleSheets/auth.css"
 
 const SignUp = () => {
   let navigate = useNavigate()
   const location = useLocation()
-  const roleFromState = location.state?.role || "Attendee"
-  
+  const roleFromState = location.state?.role 
+  console.log(roleFromState)
+
   const [countries, setCountries] = useState([])
   const [selectedCode, setSelectedCode] = useState("+973")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errors, setErrors] = useState({})
 
   const initialState = {
     name: "",
@@ -29,26 +31,42 @@ const SignUp = () => {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
-  const validate = (value) => {
-    if (
-      validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-      })
-    ) {
-      setErrorMessage("")
-    } else {
-      setErrorMessage("Weak Password!")
+  const validate = (e) => {
+    const { name, value } = e.target
+    let message = ""
+
+    if (name === "password") {
+      if (
+        !validator.isStrongPassword(value, {
+          minLength: 8,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+      ) {
+        message = "Weak Password!"
+      }
+    } else if (name === "phone") {
+      if (!/^\d+$/.test(value)) {
+        message = "Phone number should consist of digits only!"
+      }
+    } else if (name === "confirmPassword") {
+      if (value !== formValues.password) {
+        message = "Passwords do not match!"
+      }
     }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: message,
+    }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setErrorMessage("")
-    const fullPhoneNumber = `${selectedCode}${formValues.phone}`
+    setErrors({})
+    const fullPhoneNumber = `${selectedCode.replace("+", "")}${formValues.phone}`
 
     try {
       const payload = await SignUpUser({
@@ -60,42 +78,56 @@ const SignUp = () => {
         navigate("/auth/sign-in")
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      const msg = error.message
+
+      setErrors((prev) => ({
+        ...prev,
+        email: msg.includes("email") ? msg : "",
+      }))
     }
   }
 
-useEffect(() => {
-  const fetchCountries = async () => {
-    try {
-      const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,idd")
-      const data = res.data
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const res = await axios.get(
+          "https://restcountries.com/v3.1/all?fields=name,idd"
+        )
+        const data = res.data
 
-      const formatted = data
-        .map((country) => {
-          const code = country.idd?.root + (country.idd?.suffixes?.[0] || "")
-          return {
-            name: country.name.common,
-            code: code || null,
-          }
-        })
-        .filter((c) => c.code)
-        .sort((a, b) => a.name.localeCompare(b.name))
+        const formatted = data
+          .map((country) => {
+            const code = country.idd?.root + (country.idd?.suffixes?.[0] || "")
+            return {
+              name: country.name.common,
+              code: code || null,
+            }
+          })
+          .filter((c) => c.code)
+          .sort((a, b) => a.name.localeCompare(b.name))
 
-      setCountries(formatted)
-    } catch (err) {
-      console.error("Failed to load country codes", err)
+        setCountries(formatted)
+      } catch (err) {
+        setErrorMessage("Loading country codes failed!")
+      }
     }
-  }
 
-  fetchCountries()
-}, [])
-
+    fetchCountries()
+  }, [])
 
   return (
-    <div className="wrapper">
-      <h2 className="form-title">Sign Up</h2>
-      <div className="signUp-form">
-        <form onSubmit={handleSubmit} className="sign-up">
+    <div className="authentication-card">
+      <div className="illustration-panel">
+        <img src={`${login}`} alt="Book Fair" />
+      </div>
+      <div className="form-panel">
+      <a href="/auth"> ←</a> 
+        <h2>Welcome . . .</h2>
+        <p>
+          Fulfill your information to continue as an{" "}
+          <strong>{roleFromState}</strong>
+        </p>
+        <form onSubmit={handleSubmit}>
           <div className="name-row">
             <label>
               Name
@@ -104,12 +136,11 @@ useEffect(() => {
                 name="name"
                 placeholder="Name"
                 onChange={handleChange}
-                value={formValues.firstName}
+                value={formValues.name}
                 required
               />
             </label>
           </div>
-
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -120,15 +151,20 @@ useEffect(() => {
             required
             autoComplete="email"
           />
+          {errors.email && <p className="error">{errors.email}</p>}
           <label htmlFor="phoneNumber">Phone Number</label>
           <div className="phone-input-wrapper">
-            <select className="phone-code"
+            <select
+              className="phone-code"
               value={selectedCode}
               onChange={(e) => setSelectedCode(e.target.value)}
               required
             >
               {countries.map((country) => (
-                <option key={`${country.name}-${country.code}`} value={country.code}>
+                <option
+                  key={`${country.name}-${country.code}`}
+                  value={country.code}
+                >
                   {country.code}
                 </option>
               ))}
@@ -137,18 +173,23 @@ useEffect(() => {
               type="tel"
               name="phone"
               placeholder="0000 0000"
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e)
+                validate(e)
+              }}
               value={formValues.phone}
+              className={errors.phone ? "input-error" : ""}
               required
             />
           </div>
+          {errors.phone && <p className="error">{errors.phone}</p>}
 
           <div className="password-group">
             <div className="label-with-icon">
               <label htmlFor="password">Password</label>
               <span
                 className={`tooltip-icon ${
-                  errorMessage ? "tooltip-error" : ""
+                  errors.password ? "tooltip-error" : ""
                 }`}
                 title="Password must be at least 8 characters, include upper & lowercase letters, a number, and a special character."
               >
@@ -162,26 +203,34 @@ useEffect(() => {
               placeholder="Password"
               onChange={(e) => {
                 handleChange(e)
-                validate(e.target.value)
+                validate(e)
               }}
               value={formValues.password}
               required
               autoComplete="off"
-              className={errorMessage ? "input-error" : ""}
+              className={errors.password ? "input-error" : ""}
             />
-            {errorMessage && <span className="error">{errorMessage}</span>}
+            {errors.password && <p className="error">{errors.password}</p>}
+            <label htmlFor="confirmPassword">Comfirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              onChange={(e) => {
+                handleChange(e)
+                validate(e)
+              }}
+              value={formValues.confirmPassword}
+              required
+              autoComplete="off"
+              className={errors.confirmPassword ? "input-error" : ""}
+            />
+            {errors.confirmPassword && (
+              <p className="error">{errors.confirmPassword}</p>
+            )}
           </div>
+          {errors.submit && <p className="error">{errors.submit}</p>}
 
-          <label htmlFor="confirmPassword">Comfirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm password"
-            onChange={handleChange}
-            value={formValues.confirmPassword}
-            required
-            autoComplete="off"
-          />
           <button
             disabled={
               !formValues.name ||
@@ -195,19 +244,10 @@ useEffect(() => {
           >
             Sign Up
           </button>
+          <p onClick={() => navigate("/auth/sign-in")} className="switch">
+            Has an account? <strong>Sign In</strong>
+          </p>
         </form>
-        {errorMessage && <span className="error">{errorMessage}</span>}
-
-        <p id="otherAuth">
-          Already have an account?{" "}
-          <button
-            type="button"
-            className="switch"
-            onClick={() => navigate("/auth/sign-in")}
-          >
-            Sign In
-          </button>
-        </p>
       </div>
     </div>
   )

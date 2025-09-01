@@ -3,10 +3,14 @@ import RequiredRoles from "./RequiredRoles"
 import FairTickets from "./FairTickets"
 import StandTypes from "./StandsTypes"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import login from "../assets/new.jpg"
+
 import axios from "axios"
 
 const NewForm = () => {
   const { user } = useUser()
+  const navigate= useNavigate()
   const [showHallInput, setShowHallInput] = useState(false)
 
   const initialState = {
@@ -103,11 +107,7 @@ const NewForm = () => {
     }))
   }
 
-  useEffect(() => {
-    console.log("Updated exhibitorRoles:", formValues.exhibitorRoles)
-  }, [formValues.exhibitorRoles])
 
-  // to submit
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -115,8 +115,6 @@ const NewForm = () => {
       const payload = {
         ...formValues,
       }
-      console.log("payload", payload)
-
       const token = localStorage.getItem("token")
       const response = await axios.post(
         "http://localhost:3010/fairs/",
@@ -129,18 +127,24 @@ const NewForm = () => {
       )
 
       setFormValues(initialState)
+      navigate("/fairs")
     } catch (err) {
-      // setError(
-      //   err.response?.data?.error || "Failed to create fair, please try again."
-      // )
+      setError(
+        err.response?.data?.error || "Failed to create fair, please try again."
+      )
     }
   }
 
   return (
     <>
       <div className="new">
-        <form>
-          <label htmlFor="name">Fair,</label>
+        <div className="illustration-panel">
+          <img src={`${login}`} alt="Book Fair" />
+        </div>
+        
+        <form className="form-panel">
+          <h2>New Fair Details</h2>
+          <label htmlFor="name">Fair</label>
           <input
             type="text"
             name="name"
@@ -192,7 +196,7 @@ const NewForm = () => {
               ></input>
               {showHallInput
                 ? formValues.halls?.map((hall, index) => (
-                    <div key={index}>
+                    <div key={hall._id}>
                       <h4>Hall {index + 1}</h4>
                       <label>Hall Name</label>
                       <input
@@ -235,7 +239,6 @@ const NewForm = () => {
                     <FairTickets
                       tickets={formValues.tickets}
                       onTicketsChange={handleTicketsChange}
-                     
                     />
                   ) : null}
                 </>

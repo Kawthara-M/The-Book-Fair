@@ -1,0 +1,54 @@
+
+.section {
+  padding: 4rem 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.hero-heading {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.hero-subheading {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.hero-buttons,
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.hero-buttons button:hover{
+  color:var(--btn-color);
+}
+
+.btn {
+  background-color: var(--btn-bg);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid var(--btn-bg);
+  color: var(--btn-bg);
+}
+
+.btn.secondary:hover {
+  background-color: var(--btn-bg);
+  color: white;
+}

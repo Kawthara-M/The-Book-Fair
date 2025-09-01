@@ -1,14 +1,25 @@
 body.dark {
   --bg-color: #1a1a1a;
-  --footer-bg: #242424;
+  --footer-bg: #1a1a1a;
   --text-color: #f3e6e6;
-  --nav-bg: #242424;
+  --nav-bg: #1a1a1a;
+  --card-bg: #242424;
+  --form-color: #2a2a2a;
+  --btn-bg: #f6e3da;
+  --btn-color: black;
+  --a-color: #ecdfcc;
+  --label-color: #f3e6e6;
 }
 body.light {
-  --bg-color: rgb(244, 236, 236);
-  --footer-bg: rgb(243, 230, 230);
+  --bg-color: #faf9ee;
+  --footer-bg: #fff8e8;
   --text-color: rgb(39, 38, 38);
-  --nav-bg: rgb(243, 230, 230);
+  --nav-bg: ##faf9ee;
+  --card-bg: #fff2eb;
+  --form-color: transparent;
+  --btn-bg: #4e0202;
+  --btn-color: white;
+  --accent-color: brown;
 }
 
 body {
@@ -30,5 +41,50 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height:80%;
+  height: 80%;
+}
+
+.center-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  color: var(--a-color);
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  color: #6f0101;
+}
+
+button:hover {
+  background-color: #6f0101;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--text-color);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+input[type="text"], input [type="radio"] {
+border:1px solid var(--text-color)
 }

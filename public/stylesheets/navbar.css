@@ -45,7 +45,7 @@ img.icon {
 }
 .icon-btn:hover,
 #theme:hover {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 #theme {

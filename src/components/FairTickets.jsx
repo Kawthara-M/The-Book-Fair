@@ -41,12 +41,7 @@ const FairTickets = ({ tickets = [], onTicketsChange }) => {
       <h4>Fair Tickets</h4>
       {localTickets.map((ticket, index) => (
         <div
-          key={index}
-          style={{
-            border: "1px solid #ccc",
-            marginBottom: "1rem",
-            padding: "1rem",
-          }}
+          key={ticket._id}
         >
           <label>Type</label>
           <input
