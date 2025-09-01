@@ -133,73 +133,61 @@ const EditProfile = ({ profile, setProfile, setView }) => {
 
   return (
     <div className="edit-profile">
-      <h2>Edit Profile</h2>
+      <h1>Edit Profile</h1>
 
-      <label>
-        Name:
-        <input
-          name="name"
-          value={formValues.name}
-          onChange={handleChange}
-          required
-        />
-      </label>
+      <label>Name:</label>
+      <input
+        name="name"
+        value={formValues.name}
+        onChange={handleChange}
+        required
+      />
 
-      <label>
-        Phone:
-        <input
-          name="phone"
-          value={formValues.phone}
-          onChange={handleChange}
-          className={errors.phone ? "input-error" : ""}
-          required
-        />
-        {errors.phone && <p className="error">{errors.phone}</p>}
-      </label>
+      <label>Phone:</label>
+      <input
+        name="phone"
+        value={formValues.phone}
+        onChange={handleChange}
+        className={errors.phone ? "input-error" : ""}
+        required
+      />
+      {errors.phone && <p className="error">{errors.phone}</p>}
 
-      <label>
-        Email:
-        <input
-          name="email"
-          type="email"
-          value={formValues.email}
-          onChange={handleChange}
-          required
-        />
-        {errors.email && <p className="error">{errors.email}</p>}
-      </label>
+      <label>Email:</label>
+      <input
+        name="email"
+        type="email"
+        value={formValues.email}
+        onChange={handleChange}
+        required
+      />
+      {errors.email && <p className="error">{errors.email}</p>}
       {errors.submit && <p className="error">{errors.submit}</p>}
       <button onClick={handleSave} disabled={!isProfileValid}>
         Save Changes
       </button>
 
-      <hr />
-
       <h3>Change Password</h3>
 
-      <label>
-        Old Password:
-        <input
-          type="password"
-          name="oldPassword"
-          value={formValues.oldPassword}
-          onChange={handleChange}
-          className={errors.oldPassword ? "input-error" : ""}
-        />
-        {errors.oldPassword && <p className="error">{errors.oldPassword}</p>}
-      </label>
+      <label>Old Password:</label>
+      <input
+        type="password"
+        name="oldPassword"
+        value={formValues.oldPassword}
+        onChange={handleChange}
+        className={errors.oldPassword ? "input-error" : ""}
+      />
+      {errors.oldPassword && <p className="error">{errors.oldPassword}</p>}
 
-      <label>
-        New Password:
-        <input
-          type="password"
-          name="newPassword"
-          value={formValues.newPassword}
-          onChange={handleChange}
-          className={errors.newPassword ? "input-error" : ""}
-        />
-        {errors.newPassword && <p className="error">{errors.newPassword}</p>}
-      </label>
+      <label>New Password:</label>
+      <input
+        type="password"
+        name="newPassword"
+        value={formValues.newPassword}
+        onChange={handleChange}
+        className={errors.newPassword ? "input-error" : ""}
+      />
+      {errors.newPassword && <p className="error">{errors.newPassword}</p>}
       {errors.submit && <p className="error">{errors.submit}</p>}
       <div className="password-buttons">
         <button onClick={handlePasswordUpdate} disabled={!isPasswordValid}>

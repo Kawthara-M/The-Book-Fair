@@ -19,12 +19,16 @@ const BookingRequest = ({ fair }) => {
 
   const updateStatus = async (booking, status) => {
     try {
-      const response = await User.put(`/bookings/update-status/${booking._id}`, { status })
+      const response = await User.put(
+        `/bookings/update-status/${booking._id}`,
+        { status }
+      )
 
-      // Update state locally to reflect the new status
       setBookings((prevBookings) =>
         prevBookings.map((b) =>
-          b._id === booking._id ? { ...b, status: response.data.booking.status } : b
+          b._id === booking._id
+            ? { ...b, status: response.data.booking.status }
+            : b
         )
       )
     } catch (error) {
@@ -44,27 +48,34 @@ const BookingRequest = ({ fair }) => {
             : null
 
           return (
-            <div key={booking._id} >
-              <h4>Role: {booking.exhibitorRole}</h4>
-
-              <a href={`mailto:${booking.exhibitor.user.email}`}>
-                <h4>Request By: {booking.exhibitor.user.name}</h4>
+            <div key={booking._id} className="single-request">
+              <div className="info-wrapper">
+                {" "}
+                <h4>Role: </h4>
+                <p>{booking.exhibitorRole}</p>
+              </div>
+              <a
+                href={`mailto:${booking.exhibitor.user.email}`}
+                className="info-wrapper"
+              >
+                <h4>Request By: </h4>
+                <p>{booking.exhibitor.user.name}</p>
               </a>
-
-              <h4>Stand Requested: {booking.stands[0]?.type || "N/A"}</h4>
-              <h4>Status: {booking.status}</h4>
+              <div className="info-wrapper">
+                <h4>Stand Requested: </h4>
+                <p>{booking.stands[0]?.type}</p>
+              </div>
+              <div className="info-wrapper">
+                <h4>Status: </h4>
+                <p>{booking.status}</p>
+              </div>
 
               {portfolioUrl ? (
                 <>
-                  <h4>Portfolio: {portfolioFileName}</h4>
-                  <a
-                    href={portfolioUrl}
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <button>Download Portfolio</button>
-                  </a>
+                  <div className="info-wrapper">
+                    <h4>Portfolio: </h4>
+                    <p>{portfolioFileName}</p>
+                  </div>
                 </>
               ) : (
                 <h4>No portfolio</h4>
@@ -72,8 +83,22 @@ const BookingRequest = ({ fair }) => {
 
               {booking.status === "pending" && (
                 <>
-                  <button onClick={() => updateStatus(booking, "accepted")}>Accept</button>
-                  <button onClick={() => updateStatus(booking, "rejected")}>Reject</button>
+                  <div className="req-buttons">
+                    <button onClick={() => updateStatus(booking, "accepted")}>
+                      ✓
+                    </button>
+                    <button onClick={() => updateStatus(booking, "rejected")}>
+                      ✗
+                    </button>
+                    <a
+                      href={portfolioUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button>⤓</button>
+                    </a>
+                  </div>
                 </>
               )}
             </div>

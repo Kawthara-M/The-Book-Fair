@@ -4,7 +4,7 @@ import "../../public/stylesheets/booking.css"
 
 const Booking = ({ booking, removeBooking }) => {
   if (!booking || !booking.stands?.length) {
-    return <span className="loader"></span>
+    return null
   }
 
   const initialStand = booking.stands[0]
@@ -26,14 +26,18 @@ const Booking = ({ booking, removeBooking }) => {
     <>
       {booking && booking.stands?.length > 0 ? (
         <div className="booking">
-<div className="booking-header">
-  <h1>{booking.fair.name}</h1>
-  {booking.status === "pending" && (
-    <span className="delete-x" onClick={deleteBooking} title="Delete Booking">
-      ×
-    </span>
-  )}
-</div>
+          <div className="booking-header">
+            <h1>{booking.fair.name}</h1>
+            {booking.status === "pending" && (
+              <span
+                className="delete-x"
+                onClick={deleteBooking}
+                title="Delete Booking"
+              >
+                ×
+              </span>
+            )}
+          </div>
 
           <div className="line">
             <h4>{selectedStand.name}</h4>
@@ -51,11 +55,9 @@ const Booking = ({ booking, removeBooking }) => {
           </div>
 
           <p>Status: {booking.status}</p>
-
-    
         </div>
       ) : (
-        <span className="loader"></span>
+        null
       )}
     </>
   )

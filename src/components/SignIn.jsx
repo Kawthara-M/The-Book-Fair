@@ -40,10 +40,11 @@ const SignIn = () => {
       <div className="illustration-panel">
         <img src={`${login}`} alt="Book Fair" />
       </div>
-      <div className="form-panel">
-        <h2>Welcome Back</h2>
-        <p>Fulfill your information to continue</p>
-        <form onSubmit={handleSubmit}>
+      <div className="sign-in-panel">
+        <div className="welcome-back"><h2>Welcome Back</h2>
+        <p>Fulfill your information to continue</p></div>
+        
+        <form onSubmit={handleSubmit} className="sign-in-form">
           <label htmlFor="email">Email</label>
           <input
             type="text"

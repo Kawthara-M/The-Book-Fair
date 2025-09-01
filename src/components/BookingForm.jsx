@@ -75,72 +75,78 @@ const BookingForm = () => {
 
   return (
     <>
-    <form className="booking-form">
-      <h1>Booking Details</h1>
-      <div>
-      <h2>Exhibitor Role</h2>
-      {requirements?.exhibitorRoles?.map((role) => (
-        <>
-        <div key={role._id} className="line">
-          <label htmlFor={`role-${role._id}`}>
-            <strong> {role.name}</strong>
-          </label>
+      <form className="booking-form">
+        <h1>Booking Details</h1>
+        <div>
+          <h2>Exhibitor Role</h2>
+          {requirements?.exhibitorRoles?.map((role) => (
+            <>
+              <div key={role._id} className="line">
+                <label htmlFor={`role-${role._id}`}>
+                  <strong> {role.name}</strong>
+                </label>
+                <input
+                  type="radio"
+                  id={`role-${role._id}`}
+                  name="selectedRole"
+                  value={role.name}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                />
+              </div>
+              <p>{role.description}</p>
+            </>
+          ))}
+        </div>
+
+        <h2>Stand Type</h2>
+
+        {standTypes.map((stand) => (
+          <div className="stand" key={stand.type}>
+            <div className="line">
+              <label htmlFor={stand.type}>
+                <strong>{stand.type}</strong> — {stand.fee} BHD
+              </label>
+              <input
+                type="radio"
+                id={stand.type}
+                name="selectedStand"
+                value={stand.type}
+                disabled={stand.totalAvailability < 1}
+                onChange={(e) => setSelectedStandType(e.target.value)}
+              />
+            </div>
+            <p>
+              Availability:{" "}
+              {stand.totalAvailability > 0
+                ? stand.totalAvailability
+                : "Sold Out"}
+            </p>
+          </div>
+        ))}
+
+        <div>
+          <label htmlFor="count">Stand Count: </label>
           <input
-            type="radio"
-            id={`role-${role._id}`}
-            name="selectedRole"
-            value={role.name}
-            onChange={(e) => setSelectedRole(e.target.value)}
+            type="number"
+            id="count"
+            min="1"
+            value={standCount}
+            onChange={(e) => setStandCount(Number(e.target.value))}
           />
         </div>
-          <p>{role.description}</p></>
-      ))}</div>
 
-      <h2>Stand Type</h2>
-
-      {standTypes.map((stand) => (
-        <div className="stand" key={stand.type}>
-        <div  className="line">
-          <label htmlFor={stand.type}>
-            <strong>{stand.type}</strong> — {stand.fee} BHD
-          </label>
-            <input
-              type="radio"
-              id={stand.type}
-              name="selectedStand"
-              value={stand.type}
-              disabled={stand.totalAvailability < 1}
-              onChange={(e) => setSelectedStandType(e.target.value)}
-            />
+        <div className="center">
+          <button
+            onClick={handleBooking}
+            disabled={!selectedRole || !selectedStandType}
+          >
+            Submit Booking
+          </button>
         </div>
-          <p>
-            Availability:{" "}
-            {stand.totalAvailability > 0 ? stand.totalAvailability : "Sold Out"}
-          </p></div>
-        
-      ))}
 
-      <div>
-        <label htmlFor="count">Stand Count: </label>
-        <input
-          type="number"
-          id="count"
-          min="1"
-          value={standCount}
-          onChange={(e) => setStandCount(Number(e.target.value))}
-        />
-      </div>
-
-<div className="center">
-      <button
-        onClick={handleBooking}
-        disabled={!selectedRole || !selectedStandType}
-      >
-        Submit Booking
-      </button></div>
-
-      {message && <p>{message}</p>}
-    </form></>
+        {message && <p>{message}</p>}
+      </form>
+    </>
   )
 }
 

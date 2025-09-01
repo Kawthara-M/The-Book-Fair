@@ -1,6 +1,6 @@
 import "../../public/stylesheets/Home.css"
 import { useNavigate } from "react-router-dom"
-
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 const Home = () => {
   const navigate = useNavigate()
   return (
@@ -14,15 +14,31 @@ const Home = () => {
             Join us in exploring events that bring communities together.
           </p>
           <div className="hero-buttons">
-            <a  className="btn" onClick={()=>{navigate("/fairs")}}>
+            <a
+              className="btn"
+              onClick={() => {
+                navigate("/fairs")
+              }}
+            >
               View Upcoming Fairs
             </a>
-            <a onClick={()=>{navigate("/fairs")}} className="btn secondary">
+            <a
+              onClick={() => {
+                navigate("/fairs")
+              }}
+              className="btn secondary"
+            >
               Get Involved
             </a>
           </div>
         </div>
       </section>
+      <button className="btn btn-primary">Test Button</button>
+     {/* <DotLottieReact
+      src="https://lottie.host/44585f85-6ff4-42c4-af8a-06f11b3cf601/Q6yXY3LTES.lottie"
+      loop
+      autoplay
+    /> */}
     </>
   )
 }

@@ -1,14 +1,15 @@
 .topNav {
   background-color: var(--nav-bg);
   color: var(--text-color);
-}
 
-.topNav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: none;
   padding: 1rem;
+  margin: 0;
+  align-items: center;
+  gap:0;
 }
 
 .topNav-right,
@@ -22,6 +23,11 @@
   text-decoration: none;
   padding: 0;
   gap: 0.8rem;
+  margin: 0 2rem 0 0;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
 }
 
 img.icon {
@@ -36,6 +42,20 @@ img.icon {
 
 .topNav a {
   color: var(--text-color);
+}
+.topNav-left {
+  display: flex;
+  padding: 0;
+  margin-left: 0;
+  max-width: 8rem;
+}
+.filler {
+  width: 0;
+}
+.books-animation {
+  width: 20%;
+  margin: 0;
+  padding: 0;
 }
 
 .icon-btn {

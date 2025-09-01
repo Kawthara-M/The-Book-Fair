@@ -1,13 +1,14 @@
 import { useUser } from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
+import User from "../services/api"
 
-const Fair = ({ fair }) => {
+const Fair = ({ fair, setView }) => {
   const { user } = useUser()
   const navigate = useNavigate()
 
   const getButtonContent = (status) => {
     switch (status) {
-      case "upcoming":
+      case "openForBooking":
         return "Participate!"
       case "ongoing":
         return "Book Tickets!"
@@ -21,7 +22,7 @@ const Fair = ({ fair }) => {
         if (fair?.status === "upcoming") return "Manage Fair"
         else if (fair?.status === "ongoing") return "View Sold Tickets"
         else if (fair?.status === "openForBooking")
-          return "Review Booking Requests"
+          return "Exhibitors"
       case "Attendee":
         return "Book Tickets!"
       case "Exhibitor":
@@ -31,13 +32,20 @@ const Fair = ({ fair }) => {
     }
   }
 
+  const updateStatus = async() => {
+    await User.put(`/fairs/update-status/${fair._id}`)
+    setTimeout(()=>{
+      setView("ongoing")
+    },1000)
+  }
+
   return (
     <>
       {
         <div className="fair">
           {/* <img src="#" alt={`${fair.name}`} id="fair-img" /> */}
-            <h3>{fair.name}</h3>
-          <div>
+          <h2>{fair.name}</h2>
+          <div className="guest-div">
             <p>{fair.description}</p>
             {!user ? (
               <button
@@ -53,13 +61,20 @@ const Fair = ({ fair }) => {
                 {getButtonContent(fair.status)}
               </button>
             ) : (
-              <button
-                onClick={() => {
-                  navigate(`/fairs/${fair._id}`)
-                }}
-              >
-                {getLoggedInButtonContent()}
-              </button>
+              <div className="center-open-for-booking">
+                <button
+                  onClick={() => {
+                    navigate(`/fairs/${fair._id}`)
+                  }}
+                >
+                  {getLoggedInButtonContent()}
+                </button>
+                {fair.status === "openForBooking" ? (
+                  <button onClick={()=>{updateStatus()}}>Activate Fair</button>
+                ) : (
+                  null
+                )}
+              </div>
             )}
           </div>
         </div>

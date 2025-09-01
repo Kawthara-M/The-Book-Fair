@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import NewForm from "../components/NewForm"
 import Fair from "../components/Fair"
 import User from "../services/api"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 
 import "../../public/stylesheets/fairs.css"
 
@@ -29,13 +30,23 @@ const Fairs = () => {
   }, [view])
 
   const filteredFairs = fairs.filter((fair) => {
-    console.log(fair)
-    if (view === "ongoing" && fair.mainManager?._id === user.id)
-      return fair.status === "ongoing"
+    console.log(user?.role)
+    if (view === "ongoing") {
+      if (user?.role === "Admin") {
+        if (fair.mainManager === user.id) {
+          return fair.status === "ongoing"
+        }
+      } else {
+        return fair.status === "ongoing"
+      }
+    }
     if (view === "upcoming" && fair.mainManager?._id === user.id)
       return fair.status === "upcoming"
     if (view === "new") return fair.status === "new"
-    if (view === "openForBooking" && (fair.mainManager?._id === user.id || user.role==="Exhibitor"))
+    if (
+      view === "openForBooking" &&
+      (fair.mainManager?._id === user.id || user.role === "Exhibitor")
+    )
       return fair.status === "openForBooking"
     if (view === "guest") {
       return fair.status === "openForBooking" || fair.status === "ongoing"
@@ -58,19 +69,29 @@ const Fairs = () => {
         {view === "new" ? (
           <>
             {" "}
-            <NewForm />
+            <NewForm direct={setView} />
             <div>{/* this empty comment is for flex thing in style */}</div>
           </>
         ) : null}
 
-        {view != "new"
-          ? filteredFairs.length > 0
-            ? filteredFairs.map((fair) => (
-                <Fair key={fair.id} fair={fair} />
-                
-              ))
-            : "No fairs"
-          : null}
+        {view != "new" ? (
+          filteredFairs.length > 0 ? (
+            filteredFairs.map((fair) => (
+              <Fair key={fair.id} fair={fair} setView={setView} />
+            ))
+          ) : (
+            <div className="align-vertical">
+              {" "}
+              <DotLottieReact
+                className="books-loader"
+                src="https://lottie.host/44585f85-6ff4-42c4-af8a-06f11b3cf601/Q6yXY3LTES.lottie"
+                loop
+                autoplay
+              />{" "}
+              {"No Fairs"}{" "}
+            </div>
+          )
+        ) : null}
       </div>
     </div>
   )

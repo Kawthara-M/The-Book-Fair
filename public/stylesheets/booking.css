@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 500px;
   padding: 1rem;
-  margin:0;
+  margin: 0;
   margin-bottom: 1rem;
   background: var(--card-bg);
 }
@@ -30,4 +30,39 @@
 .delete-x:hover {
   color: red;
   transform: scale(1.1);
+}
+
+.single-request {
+  display: flex;
+  flex-direction: column;
+}
+.req-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.req-buttons button,
+.req-buttons a {
+  margin: 4px;
+  background-color: transparent;
+  color: var(--btn-bg);
+  width: 33%;
+  text-align: center;
+}
+.req-buttons button:hover {
+  background-color: transparent;
+}
+.booking-req {
+  padding: 1rem;
+  min-width: 300px;
+  width: 100%;
+}
+.booking-req h2 {
+  margin-top: 1.8rem;
+}
+.single-request {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  margin: 2rem 1rem 0 0;
+  border-radius: 10px;
 }

@@ -14,9 +14,12 @@ const Authentication = () => {
         <div className="illustration-panel">
           <img src={`${login}`} alt="Book Fair" />
         </div>
-        <div className="form-panel">
-          <h2>Sign Up</h2>
-          <p>How would you like to access?</p>
+        <div className="sign-in-panel">
+          <div className="authentication-header">
+            <h1>Sign Up</h1>
+            <p>How would you like to access?</p>
+          </div>
+
           <div className="auth-options">
             <div>
               <button
@@ -37,7 +40,13 @@ const Authentication = () => {
           </div>
           <div className="center-wrapper">
             {" "}
-            <a onClick={()=>{navigate("/auth/sign-in")}}>Already has an Account? Sign In</a>
+            <a
+              onClick={() => {
+                navigate("/auth/sign-in")
+              }}
+            >
+              Already has an Account? Sign In
+            </a>
           </div>
         </div>
       </div>

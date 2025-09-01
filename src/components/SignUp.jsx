@@ -121,7 +121,7 @@ const SignUp = () => {
         <img src={`${login}`} alt="Book Fair" />
       </div>
       <div className="form-panel">
-      <a href="/auth"> ←</a> 
+      <a onClick={()=>navigate("/auth")}> ←</a> 
         <h2>Welcome . . .</h2>
         <p>
           Fulfill your information to continue as an{" "}

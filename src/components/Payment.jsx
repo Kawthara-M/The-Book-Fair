@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import "../../public/stylesheets/payment.css"
 
 const Payment = ({ bookedTicket, setView, fairName, newView }) => {
-    const { user } = useUser()
+  const { user } = useUser()
 
   const [form, setForm] = useState({
     cardName: "",
@@ -49,7 +49,6 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
       const rawValue = value.replace(/\D/g, "")
 
       const formattedValue = rawValue.replace(/(.{4})/g, "$1 ").trim()
-      console.log(formattedValue)
 
       setForm({ ...form, [name]: formattedValue })
       setErrors({ ...errors, [name]: "" })
@@ -64,7 +63,7 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
     if (validate()) {
       const res = await User.put(`/tickets/update-status/${bookedTicket._id}`)
       console.log("Ticket status updated:", res.data)
-      setView(newView || "Tickets") // default to Tickets if newView missing
+      setView(newView || "Tickets")
     }
   }
 
@@ -73,14 +72,11 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
       <div>
         {bookedTicket ? (
           <>
-            <div className="form-panel">
-              <h2>{fairName}</h2>
-              <p>Ticket Type: {bookedTicket.type}</p>
-              <p>Price: {bookedTicket.fee} BD</p>
-            </div>
-
             <div className="payment-details">
+              <div className="payment-header">
               <h2>Checkout</h2>
+              <h3>Ticket Type: {bookedTicket.type}</h3>
+              <h3>Price: {bookedTicket.fee} BD</h3></div>
               <form onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
                   <label>Cardholder Name</label>

@@ -54,7 +54,7 @@ const BookedTicket = ({ ticket, removeTicket, setView, setClickedTicket }) => {
       {ticketInfo.status === "unpaid" && (
         <>
           <TicketTypes ticket={ticketInfo} setTicketInfo={setTicketInfo} />
-          <div>
+          <div className="booked-ticket-buttons">
             <button
               onClick={() => {
                 setClickedTicket(ticket)

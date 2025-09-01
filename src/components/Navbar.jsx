@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useUser } from "../context/UserContext"
 
 import userIcon from "../assets/userIcon.png"
-
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 import "../../public/stylesheets/navbar.css"
 
 const Navbar = () => {
@@ -12,9 +12,14 @@ const Navbar = () => {
     <>
       <nav className="topNav">
         <div className="topNav-left">
-          <Link to="/" className="brand-logo">
-            The Book Fair
-          </Link>
+          <DotLottieReact
+            className="books-animation"
+            src="https://lottie.host/a74e21fb-5010-4f76-8705-128681aece65/A8nS4hYKQu.lottie"
+            loop
+            autoplay
+          />
+          <Link to="/" className="brand-logo">The Book Fair</Link>
+          
         </div>
 
         <div className={`topNav-center`}>

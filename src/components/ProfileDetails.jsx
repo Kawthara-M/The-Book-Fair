@@ -49,7 +49,6 @@ const ProfileDetails = ({ view, setView }) => {
 
     const getBookings = async () => {
       const response = await User.get(`/bookings/exhibitor-bookings`)
-      console.log(response.data)
       setBookings(response.data)
     }
 
@@ -90,19 +89,19 @@ const ProfileDetails = ({ view, setView }) => {
 
   return (
     <>
-      {user.role? (
+      {user.role ? (
         <div className="details-wrapper">
           {user && view === "details" ? (
             <>
               <div id="welcome">
                 <div>
-                  <h2>
-                    {" "}
-                    {user.role === "Admin" || user.role === "Exhibitor"
-                      ? user.role
-                      : null}
-                    , {profile ? profile.name : ""}
-                  </h2>
+                  <h1>
+                    <>
+                      {(user.role === "Admin" || user.role === "Exhibitor") &&
+                        `${user.role} `}
+                      {profile?.name || ""}
+                    </>
+                  </h1>
                 </div>
                 <button
                   onClick={() => setView("edit-profile")}
@@ -193,18 +192,20 @@ const ProfileDetails = ({ view, setView }) => {
                   }
                 />
               </label>
-       <div className="custom-file-upload">
-  <label htmlFor="portfolio-upload" className="upload-button">
-    Upload Portfolio (.pdf)
-  </label>
-  <input
-    id="portfolio-upload"
-    type="file"
-    accept=".pdf"
-    onChange={(e) => setPortfolioFile(e.target.files[0])}
-  />
-  {portfolioFile && <p className="file-name">{portfolioFile.name}</p>}
-</div>
+              <div className="custom-file-upload">
+                <label htmlFor="portfolio-upload" className="upload-button">
+                  Upload Portfolio (.pdf)
+                </label>
+                <input
+                  id="portfolio-upload"
+                  type="file"
+                  accept=".pdf"
+                  onChange={(e) => setPortfolioFile(e.target.files[0])}
+                />
+                {portfolioFile && (
+                  <p className="file-name">{portfolioFile.name}</p>
+                )}
+              </div>
               <div className="update-buttons">
                 <button onClick={updateProfile}>Save</button>
                 <button onClick={() => setView("portfolio")}>Cancel</button>
@@ -262,7 +263,9 @@ const ProfileDetails = ({ view, setView }) => {
           ) : null}
         </div>
       ) : (
-        <span class="loader"></span>
+        <>
+        {console.log("Iam here")}
+        <span clasName="loader"></span> </>
       )}
     </>
   )

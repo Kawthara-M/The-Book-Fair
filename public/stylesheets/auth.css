@@ -11,7 +11,6 @@ form {
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: fit-content;
   box-sizing: border-box;
 }
 form.auth-options {
@@ -51,18 +50,6 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:disabled {
-  background-color: #efeded;
-  border: 1px solid #ccc;
-  cursor: not-allowed;
-}
-
-#otherAuth {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  text-align: center;
 }
 
 .phone-input-wrapper {
@@ -159,8 +146,7 @@ button:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2.5rem;
-  margin-right: 1rem;
+  margin: 2rem auto;
   margin-bottom: 0;
   height: 100%;
   padding: 1rem;
@@ -172,13 +158,12 @@ button:disabled {
 
 .authentication-card {
   display: flex;
-  margin: 3rem 0;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   width: 80%;
   height: 80%;
-  max-height: 600px;
-  max-width: 900px;
+  max-height: 450px;
+  max-width: 700px;
   background: var(--card-bg);
 }
 
@@ -187,6 +172,7 @@ button:disabled {
   position: relative;
   overflow: hidden;
   padding: 0.5rem;
+  mix-blend-mode: multiply;
 }
 
 .illustration-panel img {
@@ -195,6 +181,7 @@ button:disabled {
   object-fit: cover;
   display: block;
   border-radius: 5px;
+  background-color: transparent !important;
 }
 
 .form-panel {
@@ -205,17 +192,39 @@ button:disabled {
   justify-content: flex-start;
   overflow-y: auto;
 }
-.form-panel h2 {
+
+.sign-in-panel {
+  flex: 1;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding-right: 1rem;
+}
+.welcome-back {
+  margin-bottom: 0;
+}
+.welcome-back h2 {
+  margin-bottom: 2px;
+}
+.sign-in-form {
+  margin: 0 1rem 0.5rem .5rem;
+}
+/* .form-panel h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
-}
+} */
 
 @media (max-width: 768px) {
   .authentication-card {
     flex-direction: column;
-    width: 400px;
+    width: 350px;
     padding: 1rem;
     height: 75%;
+    max-height: 350px;
   }
 
   .illustration-panel {
@@ -246,4 +255,15 @@ button:disabled {
     width: 100%;
     margin-bottom: 0.5rem;
   }
+}
+
+.authentication-header {
+  padding-right: 0;
+}
+.authentication-header p {
+  margin-top: 0;
+  margin-left: 0;
+}
+.authentication-header h1 {
+  margin-bottom: 0.4rem !important;
 }

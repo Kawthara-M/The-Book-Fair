@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
-import AboutUs from "./pages/AboutUs"
 import Authentication from "./pages/Authentication"
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
@@ -25,7 +24,6 @@ function App() {
           <Route path="/auth" element={<Authentication/>} />
           <Route path="/auth/sign-in" element={<SignIn/>} />
           <Route path="/auth/sign-up" element={<SignUp/>} />
-          {/* <Route path="/about" element={<AboutUs/>} /> */}
           <Route path="/fairs" element={<Fairs/>} />
           <Route path="/fairs/:fairId" element={<FairPage/>} />
           <Route path={user ?`/profile/${user.id}`: '/auth'} element={user? <Profile/> : <Authentication />} />
@@ -37,3 +35,16 @@ function App() {
 }
 
 export default App
+/* 
+import React from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+const App = () => {
+  return (
+    <DotLottieReact
+      src="path/to/animation.lottie"
+      loop
+      autoplay
+    />
+  );
+}; */

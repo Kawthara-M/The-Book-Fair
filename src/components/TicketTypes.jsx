@@ -45,7 +45,7 @@ const TicketTypes = ({ ticket, setTicketInfo }) => {
   }
 
   return (
-    <select value={selectedType} onChange={handleChange}>
+    <select value={selectedType} onChange={handleChange} className="select-type">
       <option value="" disabled>
         Select ticket type
       </option>

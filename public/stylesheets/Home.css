@@ -26,9 +26,6 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
-.hero-buttons button:hover{
-  color:var(--btn-color);
-}
 
 .btn {
   background-color: var(--btn-bg);
@@ -52,3 +49,4 @@
   background-color: var(--btn-bg);
   color: white;
 }
+

@@ -11,15 +11,15 @@ body.dark {
   --label-color: #f3e6e6;
 }
 body.light {
-  --bg-color: #faf9ee;
-  --footer-bg: #fff8e8;
+  --bg-color: #f3f2eb;
+  --footer-bg: #f3f2eb;
   --text-color: rgb(39, 38, 38);
-  --nav-bg: ##faf9ee;
+  --nav-bg: #f3f2eb;
   --card-bg: #fff2eb;
   --form-color: transparent;
   --btn-bg: #4e0202;
   --btn-color: white;
-  --accent-color: brown;
+  --accent-color: rgb(64, 23, 23);
 }
 
 body {
@@ -28,6 +28,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   font-family: "Playfair Display", serif;
+  overflow: hidden;
 }
 
 .app-container {
@@ -35,13 +36,15 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  width:100vw;
   margin: 0;
+  overflow-y: auto;
 }
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  padding: 0 auto;
 }
 
 .center-wrapper {
@@ -61,6 +64,9 @@ a:hover {
   color: #6f0101;
 }
 
+button {
+  background-color: var(--btn-bg);
+}
 button:hover {
   background-color: #6f0101;
 }
@@ -85,6 +91,22 @@ button:hover {
   }
 }
 
-input[type="text"], input [type="radio"] {
-border:1px solid var(--text-color)
+input[type="text"],
+input [type="radio"] {
+  border: 1px solid var(--text-color);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: alpha(opacity=90);
+}
+
+.books-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 50%;;
+  margin: auto;
 }
