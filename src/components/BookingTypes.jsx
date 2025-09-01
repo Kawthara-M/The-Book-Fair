@@ -21,7 +21,7 @@ const BookingTypes = ({ booking, selectedStand, setSelectedStand, getStandFee })
             }
           })
         })
-        //    console.log("unique types, ", uniqueTypes)
+
 
         setAvailableTypes([...uniqueTypes])
       } catch (err) {

@@ -7,7 +7,7 @@ import "../../public/stylesheets/payment.css"
 
 const Payment = ({ bookedTicket, setView, fairName, newView }) => {
   const { user } = useUser()
-
+  console.log(bookedTicket)
   const [form, setForm] = useState({
     cardName: "",
     cardNumber: "",
@@ -16,6 +16,7 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
   })
 
   const [errors, setErrors] = useState({})
+  const [submitError, setSubmitError] = useState("")
 
   const validate = () => {
     const newErrors = {}
@@ -61,9 +62,26 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (validate()) {
-      const res = await User.put(`/tickets/update-status/${bookedTicket._id}`)
-      console.log("Ticket status updated:", res.data)
-      setView(newView || "Tickets")
+      console.log(bookedTicket.status)
+      try {
+        const res = await User.put(`/tickets/update-status/${bookedTicket._id}`)
+        console.log("Ticket status updated:", res.data)
+        setView(newView || "Tickets")
+      } catch (error) {
+  console.error("Catch block hit", error)
+    
+  if (error.response) {
+    const msg =
+      error.response.data?.msg ||
+      error.response.data?.error ||
+      "Something went wrong. Please try again."
+    console.log("Setting error msg:", msg)
+    setSubmitError(msg)
+  } else {
+    console.log("Network or unknown error")
+    setSubmitError("Network error. Please check your connection.")
+  }
+      }
     }
   }
 
@@ -74,10 +92,12 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
           <>
             <div className="payment-details">
               <div className="payment-header">
-              <h2>Checkout</h2>
-              <h3>Ticket Type: {bookedTicket.type}</h3>
-              <h3>Price: {bookedTicket.fee} BD</h3></div>
+                <h2>Checkout</h2>
+                <h3>Ticket Type: {bookedTicket.type}</h3>
+                <h3>Price: {bookedTicket.fee} BD</h3>
+              </div>
               <form onSubmit={handleSubmit} noValidate>
+                 {submitError && <div className="submit-error">{submitError}</div>}
                 <div className="form-group">
                   <label>Cardholder Name</label>
                   <input
@@ -151,6 +171,7 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
                   >
                     Pay Later
                   </button>
+             
                 </div>
               </form>
             </div>

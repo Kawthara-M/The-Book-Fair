@@ -173,11 +173,10 @@
 
 .select-type {
   margin: 1rem 0;
-
-  border: 1px solid #ced4da;
+  border: 1px solid var(--accent-color);
   border-radius: 0.375rem; 
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-  background-color: var(--bg-color);
+  background-color: var(--card-bg);
   color: var(--text-color);
 }
 

@@ -30,11 +30,11 @@ const Navbar = () => {
         <div className="topNav-right">
           {user ? (
             <Link to={`/profile/${user.id}`} className="icon-btn" title="User">
-              <img src={userIcon} alt="user icon" className="icon" />
+              <img src={userIcon} alt="user icon" className="icon profile-icon" />
             </Link>
           ) : (
             <Link to={`/auth`} className="icon-btn" title="User">
-              <img src={userIcon} alt="user icon" className="icon" />
+              <img src={userIcon}  alt="user icon" className="icon profile-icon" />
             </Link>
           )}
         </div>

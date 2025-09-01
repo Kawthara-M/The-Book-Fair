@@ -5,7 +5,7 @@ import User from "../services/api"
 import EditProfile from "./EditProfile"
 import BookedTicket from "./BookedTicket"
 import Booking from "../components/Booking"
-
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 import editIcon from "../assets/edit.png"
 
 const ProfileDetails = ({ view, setView }) => {
@@ -264,8 +264,8 @@ const ProfileDetails = ({ view, setView }) => {
         </div>
       ) : (
         <>
-        {console.log("Iam here")}
-        <span clasName="loader"></span> </>
+          <DotLottieReact src="path/to/animation.lottie" loop autoplay />{" "}
+        </>
       )}
     </>
   )

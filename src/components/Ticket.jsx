@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useUser } from "../context/UserContext"
 import Payment from "./Payment"
-import TicketTypes from "./TicketTypes"
-
 import User from "../services/api"
 
 const Ticket = ({
@@ -19,20 +17,33 @@ const Ticket = ({
   const [ticketAvailability, setTicketAvailability] = useState(
     ticket?.availability
   )
+  const [errorMsg, setErrorMsg] = useState("")
 
   const postTicket = async () => {
-    const response = await User.post(`/tickets/${fairId}`, {
-      type: ticket.type,
-    })
-    setTicketAvailability((prev) => prev - 1)
+    try {
+      const response = await User.post(`/tickets/${fairId}`, {
+        type: ticket.type,
+      })
 
-    setBookedTicket({
-      ...ticket,
-      status: "unpaid",
-      fairName: fairName,
-    })
+      setTicketAvailability((prev) => prev - 1)
 
-    setView("payment")
+      setBookedTicket({
+        ...ticket,
+        status: "unpaid",
+        fairName: fairName,
+        _id: response.data.ticket._id,
+      })
+
+      setView("payment")
+    } catch (error) {
+      if (
+        error.response?.data?.msg ||
+        error.response?.data?.error ||
+        "Ticket wan't booked, try again later"
+      ) {
+        setErrorMsg(msg)
+      }
+    }
   }
 
   return (
@@ -45,7 +56,8 @@ const Ticket = ({
 
           <div className="line">
             <p>
-              <strong>Valid from</strong> {ticket.startDate} <strong>to </strong>
+              <strong>Valid from</strong> {ticket.startDate}{" "}
+              <strong>to </strong>
               {ticket.endDate} since <strong>{ticket.entryTime}</strong>
             </p>
             <p>{ticket.fee} BD</p>
@@ -54,12 +66,13 @@ const Ticket = ({
           {/* {ticketAvailability > 0 ? (
             <p>Availability {ticketAvailability}</p>
           ) : null} */}
-
+          {errorMsg && <div className="ticket-error">{errorMsg}</div>}
           {(view && view === "Tickets") || view === "guest" ? (
             <div className="center-button">
-            <button disabled={!user} onClick={() => postTicket()}>
-              Book
-            </button></div>
+              <button disabled={!user || ticketAvailability === 0} onClick={() => postTicket()}>
+                Book
+              </button>
+            </div>
           ) : null}
         </div>
       ) : null}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
-  console.log("passed halls to req roles:", halls)
+
   const predefinedRoles = [
     {
       name: "Publisher",
