@@ -63,9 +63,6 @@ const Ticket = ({
             <p>{ticket.fee} BD</p>
           </div>
 
-          {/* {ticketAvailability > 0 ? (
-            <p>Availability {ticketAvailability}</p>
-          ) : null} */}
           {errorMsg && <div className="ticket-error">{errorMsg}</div>}
           {(view && view === "Tickets") || view === "guest" ? (
             <div className="center-button">

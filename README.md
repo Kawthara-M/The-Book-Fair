@@ -1,6 +1,9 @@
-# The Book Fair
-**Date** Aug / 24 / 2025 <br>
-**Developed By**  [Kawthar Mohammad](https://github.com/Kawthara-M) <br>
+<h1>
+  <img src="src/assets/Books.gif"  width="30" height="30"  alt ="STACK OF BOOKS gif"style="vertical-align:middle; ">
+  Cat-ch It!
+</h1>
+
+**Developer**  [Kawthar Mohammad](https://github.com/Kawthara-M) <br>
 **Deployed Version** [The Book Fair](the-book-fair.surge.sh)
 
 ## 📌 Description
@@ -53,31 +56,31 @@ The following wireframes present the main visual blueprints of the application's
  <img src="src/assets/Profile Books.png" height="200px" alt="Exhibitor Profile View">
 
 
----
 
 ### ✨ **Future Enhancements**
 
+- **Statistics View for Admin**
 - **Secure Payment Methods** : Fully functional checkout with secure gateways (credit/debit cards, Apple Pay, Benefit Pay).
 - **Multi-language Support** : Arabic and English interface.
 - **Sponsors Interface** : Garanting Access to sponsors who would like to fund a fair.
 
----
 
-### **Credits**
 
-#### **BackEnd**
+## **Credits**
+
+**BackEnd**
 
 - Password Validator: [npm package](https://www.npmjs.com/package/password-validator)
 
-#### **FrontEnd**
+**FrontEnd**
 
-- Password validator: [Geeks for geeks](https://www.geeksforgeeks.org/reactjs/create-a-password-validator-using-reactjs/)
+- Password validator: [Geeks for Geeks](https://www.geeksforgeeks.org/reactjs/create-a-password-validator-using-reactjs/)
 - Country Codes API: [REST Countries](https://restcountries.com/)
 
-#### **Styling**
+**Styling**
 
 - Icons: [Flaticon](https://www.flaticon.com/)
-- Loadings: [Css loaders](https://cssloaders.github.io/)
+- Loadings: [LottieFiles](https://lottiefiles.com/)
 ---
 
 
