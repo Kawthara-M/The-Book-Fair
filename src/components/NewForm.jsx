@@ -245,6 +245,7 @@ const NewForm = ({ direct }) => {
               halls={formValues.halls}
               handleRolesChange={handleRolesChange}
             />
+            <div className="roles-buttons">
             <button type="button" onClick={() => setView(view - 1)}>
               Back
             </button>
@@ -254,25 +255,26 @@ const NewForm = ({ direct }) => {
               disabled={formValues.exhibitorRoles.length === 0}
             >
               Continue
-            </button>
+            </button></div>
           </>
         )}
 
         {view === 3 && (
           <>
-            <h2>Tickets</h2>
+            <h2> Fair Tickets</h2>
             <FairTickets
               tickets={formValues.tickets}
               onTicketsChange={handleTicketsChange}
             />
+            <div className="roles-buttons">
             <button type="button" onClick={() => setView(view - 1)}>
               Back
             </button>
-            <button type="submit">Submit</button>
+            <button type="submit">Submit</button></div>
           </>
         )}
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="add-error">{error}</p>}
       </form>
     </div>
   )

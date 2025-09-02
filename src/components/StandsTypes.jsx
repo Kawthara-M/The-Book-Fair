@@ -11,22 +11,22 @@ const StandTypes = ({ stands, onStandChange, onStandsCountChange }) => {
       />
       {stands.map((stand, idx) => (
         <div key={idx} >
-          <label>Type</label>
+          <label> Stand {idx+1} Type</label>
           <input
             type="text"
             name="standType"
             value={stand.type}
             onChange={(e) => onStandChange(idx, "type", e.target.value)}
           />
-          <label htmlFor="standPrice">Price</label>
+          <label htmlFor="standFee"> Stand {idx+1} Price</label>
           <input
             type="number"
-            name="standPrice"
-            value={stand.price}
+            name="standFee"
+            value={stand.fee}
             min ="0"
             onChange={(e) => onStandChange(idx, "fee", e.target.value)}
           />
-          <label htmlFor="availability">Availability</label>
+          <label htmlFor="availability"> Stand {idx+1} Availability</label>
           <input
             type="number"
             name="availability"

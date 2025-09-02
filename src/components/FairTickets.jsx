@@ -38,7 +38,6 @@ const FairTickets = ({ tickets = [], onTicketsChange }) => {
 
   return (
     <div className="tickets">
-      <h4>Fair Tickets</h4>
       {localTickets.map((ticket, index) => (
         <div
           key={ticket._id}
@@ -81,14 +80,37 @@ const FairTickets = ({ tickets = [], onTicketsChange }) => {
             value={ticket.endDate?.slice(0, 10) || ""}
             onChange={(e) => handleChange(index, "endDate", e.target.value)}
           />
-          <button type="button" onClick={() => removeTicket(index)}>
-            Remove
-          </button>
+            <div className="ticket-button-row">
+      <button
+        type="button"
+        className="ticket-buttons"
+        onClick={() => removeTicket(index)}
+      >
+        Remove
+      </button>
+         {index === localTickets.length - 1 && (
+        <button
+          type="button"
+          className="ticket-buttons"
+          onClick={addTicket}
+        >
+          Add Ticket Type
+        </button>
+      )}
+    </div>
         </div>
       ))}
-      <button type="button" onClick={addTicket}>
-        Add Ticket Type
-      </button>
+     {localTickets.length === 0 && (
+  <div className="center">
+    <button
+      type="button"
+      className="ticket-buttons"
+      onClick={addTicket}
+    >
+      Add Ticket Type
+    </button>
+  </div>
+)}
     </div>
   )
 }

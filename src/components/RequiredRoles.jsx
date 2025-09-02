@@ -125,14 +125,15 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
 
         return (
           <div className="role" key={role.name}>
+            <div className="line">
             <label>
+              {role.name}
+            </label>
               <input
                 type="checkbox"
                 checked={selected}
                 onChange={() => togglePredefined(role.name)}
-              />
-              {role.name}
-            </label>
+              /></div>
 
             {selected && (
               <div>
