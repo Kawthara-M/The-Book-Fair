@@ -10,7 +10,7 @@ import "../../public/stylesheets/fairs.css"
 const Fairs = () => {
   const { user } = useUser()
   const [fairs, setFairs] = useState([])
-  const [view, setView] = useState("")
+  const [view, setView] = useState("upcoming")
 
   useEffect(() => {
     const getFairs = async () => {
