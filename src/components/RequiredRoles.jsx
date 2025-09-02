@@ -67,7 +67,6 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
               standsLimit: 1,
             },
           ]
-          console.log("update of predefined",updated)
 
       return updated
     })
@@ -75,7 +74,6 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
 
   // function to show new inputs when "add more" button is clicked
   const addCustomRole = () => {
-        console.log("custom roles at beg", customRoles)
 
     setCustomRoles((prev) => [
       ...prev,
@@ -89,7 +87,6 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
   }
 
   const handleCustomRoleChange = (index, field, value) => {
-    console.log("custom roles at beg", customRoles)
     const updated = customRoles.map((role, i) => {
       if (i === index) {
         return {
@@ -101,7 +98,6 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
     })
     
     setCustomRoles(updated)
-    console.log(updated)
   }
 
   const totalUsedStands = customRoles.reduce(

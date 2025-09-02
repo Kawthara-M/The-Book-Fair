@@ -1,4 +1,3 @@
-
 import "../../public/stylesheets/footer.css"
 
 const Footer = () => {

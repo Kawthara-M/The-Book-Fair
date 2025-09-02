@@ -3,13 +3,10 @@ import RequiredRoles from "./RequiredRoles"
 import FairTickets from "./FairTickets"
 import StandTypes from "./StandsTypes"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import User from "../services/api"
-import axios from "axios"
 
 const NewForm = ({ direct }) => {
   const { user } = useUser()
-  const navigate = useNavigate()
 
   const [view, setView] = useState(0)
   const [error, setError] = useState("")
@@ -30,8 +27,7 @@ const NewForm = ({ direct }) => {
   const [formValues, setFormValues] = useState(initialState)
 
   const handleChange = (e) => {
-    console.log("form values from handle change:",formValues)
-     if (error) setError("")
+    if (error) setError("")
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
@@ -61,7 +57,6 @@ const NewForm = ({ direct }) => {
     const updatedHalls = [...formValues.halls]
     updatedHalls[hallIndex].stands[standIndex][field] = value
     setFormValues({ ...formValues, halls: updatedHalls })
-    console.log(formValues.halls)
   }
 
   const handleStandsCountChange = (hallIndex, count) => {
@@ -109,13 +104,14 @@ const NewForm = ({ direct }) => {
     try {
       const token = localStorage.getItem("token")
 
-console.log(formValues)
-    const response=  await User.post("http://localhost:3010/fairs/", formValues)
-      console.log(response)
-if (!response || !response.data || response.status !== 201) {
-  setError("Server did not return a valid response.")
-  return
-}
+      const response = await User.post(
+        "/fairs/",
+        formValues
+      )
+      if (!response || !response.data || response.status !== 201) {
+        setError("Server did not return a valid response.")
+        return
+      }
       setFormValues(initialState)
       direct("upcoming")
     } catch (err) {
@@ -249,16 +245,17 @@ if (!response || !response.data || response.status !== 201) {
               handleRolesChange={handleRolesChange}
             />
             <div className="roles-buttons">
-            <button type="button" onClick={() => setView(view - 1)}>
-              Back
-            </button>
-            <button
-              type="button"
-              onClick={() => setView(view + 1)}
-              disabled={formValues.exhibitorRoles.length === 0}
-            >
-              Continue
-            </button></div>
+              <button type="button" onClick={() => setView(view - 1)}>
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={() => setView(view + 1)}
+                disabled={formValues.exhibitorRoles.length === 0}
+              >
+                Continue
+              </button>
+            </div>
           </>
         )}
 
@@ -272,10 +269,11 @@ if (!response || !response.data || response.status !== 201) {
               startDate={formValues.startDate}
             />
             <div className="roles-buttons">
-            <button type="button" onClick={() => setView(view - 1)}>
-              Back
-            </button>
-            <button type="submit">Submit</button></div>
+              <button type="button" onClick={() => setView(view - 1)}>
+                Back
+              </button>
+              <button type="submit">Submit</button>
+            </div>
           </>
         )}
 

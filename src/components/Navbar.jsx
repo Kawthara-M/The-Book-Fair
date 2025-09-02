@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom"
 import { useUser } from "../context/UserContext"
-
-import userIcon from "../assets/userIcon.png"
 import { DotLottieReact } from "@lottiefiles/dotlottie-react"
+import userIcon from "../assets/userIcon.png"
 import "../../public/stylesheets/navbar.css"
 
 const Navbar = () => {
-  const { user, setUser } = useUser()
+  const { user } = useUser()
 
   return (
     <>

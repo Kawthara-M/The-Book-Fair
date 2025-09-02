@@ -153,7 +153,7 @@ const ProfileDetails = ({ view, setView }) => {
                         return decodeURIComponent(fileName) // used to convert chracters back to how they are if they get url encoded
                       })()
                     : "No portfolio uploaded"}
-                </h4>
+                </h4> 
               </div>
               <div className="center-wrapper">
                 <button

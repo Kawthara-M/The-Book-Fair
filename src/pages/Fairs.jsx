@@ -26,11 +26,9 @@ const Fairs = () => {
     } else if (user?.role === "Attendee") {
       setView("ongoing")
     }
-    console.log(view)
   }, [view])
 
   const filteredFairs = fairs.filter((fair) => {
-    console.log(user?.role)
     if (view === "ongoing") {
       if (user?.role === "Admin") {
         if (fair.mainManager === user.id) {
@@ -52,9 +50,6 @@ const Fairs = () => {
       return fair.status === "openForBooking" || fair.status === "ongoing"
     }
   })
-  if (filteredFairs) {
-    console.log(filteredFairs)
-  }
 
   return (
     <div className="fairs-page-wrapper">
@@ -91,7 +86,7 @@ const Fairs = () => {
                 autoplay
               />{" "}
               {`No ${
-                view === "ongoing" || view === "upcoming" ? view : view==="openForBooking" ? "Open For Booking" : null
+                view === "ongoing" || view === "upcoming" ? view : view==="openForBooking" ? "Open For Booking" : view==="guest" ? "ongoing" : null
               } Fairs`}{" "}
             </div>
           )

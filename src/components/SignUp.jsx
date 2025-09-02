@@ -11,7 +11,6 @@ const SignUp = () => {
   let navigate = useNavigate()
   const location = useLocation()
   const roleFromState = location.state?.role 
-  console.log(roleFromState)
 
   const [countries, setCountries] = useState([])
   const [selectedCode, setSelectedCode] = useState("+973")

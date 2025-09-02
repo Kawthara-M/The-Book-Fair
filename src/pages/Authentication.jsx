@@ -27,14 +27,14 @@ const Authentication = () => {
                 className="authentication"
                 onClick={() => handleRoleSelect("Attendee")}
               >
-                As Attendee
+                Attendee
               </button>
               <button
                 type="submit"
                 className="authentication"
                 onClick={() => handleRoleSelect("Exhibitor")}
               >
-                As Exhibitor
+                Exhibitor
               </button>
             </div>
           </div>

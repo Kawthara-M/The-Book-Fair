@@ -7,7 +7,6 @@ import "../../public/stylesheets/payment.css"
 
 const Payment = ({ bookedTicket, setView, fairName, newView }) => {
   const { user } = useUser()
-  console.log(bookedTicket)
   const [form, setForm] = useState({
     cardName: "",
     cardNumber: "",
@@ -62,25 +61,19 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (validate()) {
-      console.log(bookedTicket.status)
       try {
         const res = await User.put(`/tickets/update-status/${bookedTicket._id}`)
-        console.log("Ticket status updated:", res.data)
         setView(newView || "Tickets")
       } catch (error) {
-  console.error("Catch block hit", error)
-    
-  if (error.response) {
-    const msg =
-      error.response.data?.msg ||
-      error.response.data?.error ||
-      "Something went wrong. Please try again."
-    console.log("Setting error msg:", msg)
-    setSubmitError(msg)
-  } else {
-    console.log("Network or unknown error")
-    setSubmitError("Network error. Please check your connection.")
-  }
+        if (error.response) {
+          const msg =
+            error.response.data?.msg ||
+            error.response.data?.error ||
+            "Something went wrong. Please try again."
+          setSubmitError(msg)
+        } else {
+          setSubmitError("Network error. Please check your connection.")
+        }
       }
     }
   }
@@ -97,7 +90,9 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
                 <h3>Price: {bookedTicket.fee} BD</h3>
               </div>
               <form onSubmit={handleSubmit} noValidate>
-                 {submitError && <div className="submit-error">{submitError}</div>}
+                {submitError && (
+                  <div className="submit-error">{submitError}</div>
+                )}
                 <div className="form-group">
                   <label>Cardholder Name</label>
                   <input
@@ -171,7 +166,6 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
                   >
                     Pay Later
                   </button>
-             
                 </div>
               </form>
             </div>

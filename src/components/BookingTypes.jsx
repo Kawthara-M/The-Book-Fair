@@ -43,8 +43,6 @@ const BookingTypes = ({ booking, selectedStand, setSelectedStand, getStandFee })
       const bookingStands = await User.get(
         `bookings/${updatedBooking.data.booking._id}/stands`
       )
-      console.log("bookindstands:", bookingStands.data)
-      console.log( bookingStands.data.stands.stands[0])
       setSelectedStand({
         type: newType,
         name: bookingStands.data.stands.stands[0].name,

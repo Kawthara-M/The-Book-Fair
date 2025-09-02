@@ -8,7 +8,6 @@ const Booking = ({ booking, removeBooking }) => {
   }
 
   const initialStand = booking.stands[0]
-  console.log(booking)
   const [selectedStand, setSelectedStand] = useState(initialStand)
   const [fee, setFee] = useState(initialStand.hall.stands[0]?.fee || 0)
 

@@ -11,7 +11,6 @@ export const UserProvider = ({ children }) => {
   const checkToken = async () => {
     try {
       const userData = await CheckSession()
-      console.log(userData)
       setUser(userData)
     } catch (err) {
       console.error("Invalid token:", err.message)

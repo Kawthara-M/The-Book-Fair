@@ -12,7 +12,7 @@ const ProfileNav = ({ setView }) => {
   return (
     <>
       <div className="profile-nav">
-        <div>{/* keep this for styling */}</div>
+        <div></div>
         <div>
           {" "}
           <h4
