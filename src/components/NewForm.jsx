@@ -4,6 +4,7 @@ import FairTickets from "./FairTickets"
 import StandTypes from "./StandsTypes"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import User from "../services/api"
 import axios from "axios"
 
 const NewForm = ({ direct }) => {
@@ -29,6 +30,8 @@ const NewForm = ({ direct }) => {
   const [formValues, setFormValues] = useState(initialState)
 
   const handleChange = (e) => {
+    console.log("form values from handle change:",formValues)
+     if (error) setError("")
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
@@ -106,13 +109,13 @@ const NewForm = ({ direct }) => {
     try {
       const token = localStorage.getItem("token")
 
-      await axios.post("http://localhost:3010/fairs/", formValues, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-
+console.log(formValues)
+    const response=  await User.post("http://localhost:3010/fairs/", formValues)
+      console.log(response)
+if (!response || !response.data || response.status !== 201) {
+  setError("Server did not return a valid response.")
+  return
+}
       setFormValues(initialState)
       direct("upcoming")
     } catch (err) {
@@ -265,6 +268,8 @@ const NewForm = ({ direct }) => {
             <FairTickets
               tickets={formValues.tickets}
               onTicketsChange={handleTicketsChange}
+              endDate={formValues.endDate}
+              startDate={formValues.startDate}
             />
             <div className="roles-buttons">
             <button type="button" onClick={() => setView(view - 1)}>

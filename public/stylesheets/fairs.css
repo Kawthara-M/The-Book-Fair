@@ -95,7 +95,12 @@
 .role input[type="checkbox"] {
   width: 15%;
   height: 15%;
+  padding: 0;
 }
+
+/* .role .line input[type="checkbox"]{
+height:20%;
+} */
 
 .role input[type="text"],
 .role input[type="number"] {
@@ -331,9 +336,9 @@ h2 {
 }
 
 .add-error {
-    color: #b00000 !important;
+  color: #b00000 !important;
   font-size: 0.85rem;
-  margin: .8rem 0;
+  margin: 0.8rem 0;
   text-align: center;
   display: block;
 }

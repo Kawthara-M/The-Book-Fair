@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const FairTickets = ({ tickets = [], onTicketsChange }) => {
+const FairTickets = ({ tickets = [], onTicketsChange, startDate, endDate }) => {
   const [localTickets, setLocalTickets] = useState(tickets)
 
   useEffect(() => {
@@ -39,9 +39,7 @@ const FairTickets = ({ tickets = [], onTicketsChange }) => {
   return (
     <div className="tickets">
       {localTickets.map((ticket, index) => (
-        <div
-          key={ticket._id}
-        >
+        <div key={ticket._id}>
           <label>Type</label>
           <input
             type="text"
@@ -66,51 +64,51 @@ const FairTickets = ({ tickets = [], onTicketsChange }) => {
             type="number"
             min="0"
             value={ticket.availability}
-            onChange={(e) => handleChange(index, "availability", e.target.value)}
+            onChange={(e) =>
+              handleChange(index, "availability", e.target.value)
+            }
           />
           <label>Start Date</label>
           <input
             type="date"
-            value={ticket.startDate?.slice(0, 10) || ""}
+            min={startDate}
+            value={ticket.startDate?.slice(0, 10)}
             onChange={(e) => handleChange(index, "startDate", e.target.value)}
           />
           <label>End Date</label>
           <input
             type="date"
-            value={ticket.endDate?.slice(0, 10) || ""}
+            max={endDate}
+            value={ticket.endDate?.slice(0, 10)}
             onChange={(e) => handleChange(index, "endDate", e.target.value)}
           />
-            <div className="ticket-button-row">
-      <button
-        type="button"
-        className="ticket-buttons"
-        onClick={() => removeTicket(index)}
-      >
-        Remove
-      </button>
-         {index === localTickets.length - 1 && (
-        <button
-          type="button"
-          className="ticket-buttons"
-          onClick={addTicket}
-        >
-          Add Ticket Type
-        </button>
-      )}
-    </div>
+          <div className="ticket-button-row">
+            <button
+              type="button"
+              className="ticket-buttons"
+              onClick={() => removeTicket(index)}
+            >
+              Remove
+            </button>
+            {index === localTickets.length - 1 && (
+              <button
+                type="button"
+                className="ticket-buttons"
+                onClick={addTicket}
+              >
+                Add Ticket Type
+              </button>
+            )}
+          </div>
         </div>
       ))}
-     {localTickets.length === 0 && (
-  <div className="center">
-    <button
-      type="button"
-      className="ticket-buttons"
-      onClick={addTicket}
-    >
-      Add Ticket Type
-    </button>
-  </div>
-)}
+      {localTickets.length === 0 && (
+        <div className="center">
+          <button type="button" className="ticket-buttons" onClick={addTicket}>
+            Add Ticket Type
+          </button>
+        </div>
+      )}
     </div>
   )
 }

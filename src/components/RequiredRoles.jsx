@@ -52,7 +52,7 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
   const handlePredefinedChange = (name, field, value) => {
    
     // we receive name because we might have multipe roles that we can edit, field is thr porperty of this role to be edited
-    setCustomRoles((prev) => {
+    setCustomRoles((prev, index) => {
       const existing = prev.find((role) => role.name === name)
       const updated = existing
         ? prev.map((role) =>
@@ -67,6 +67,7 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
               standsLimit: 1,
             },
           ]
+          console.log("update of predefined",updated)
 
       return updated
     })
@@ -74,6 +75,8 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
 
   // function to show new inputs when "add more" button is clicked
   const addCustomRole = () => {
+        console.log("custom roles at beg", customRoles)
+
     setCustomRoles((prev) => [
       ...prev,
       {
@@ -86,17 +89,19 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
   }
 
   const handleCustomRoleChange = (index, field, value) => {
-      const updated = customRoles.map((role, i) => {
-    if (i === index) {
-      return {
-        ...role,
-        [field]: field === "standsLimit" ? parseInt(value) : value,
+    console.log("custom roles at beg", customRoles)
+    const updated = customRoles.map((role, i) => {
+      if (i === index) {
+        return {
+          ...role,
+          [field]: field === "standsLimit" ? parseInt(value) : value,
+        }
       }
-    }
-    return role
-  })
-
-  setCustomRoles(updated)
+      return role
+    })
+    
+    setCustomRoles(updated)
+    console.log(updated)
   }
 
   const totalUsedStands = customRoles.reduce(
@@ -173,38 +178,40 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
       })}
 
       <h4>Additional Roles</h4>
-      {customRoles
-        .filter((role) => role.isCustom)
-        .map((role, index) => (
-          <div key={index}>
-            <label>Role Name</label>
-            <input
-              type="text"
-              value={role.name}
-              onChange={(e) =>
-                handleCustomRoleChange(index, "name", e.target.value)
-              }
-            />
-            <label>Description</label>
-            <input
-              type="text"
-              value={role.description}
-              onChange={(e) =>
-                handleCustomRoleChange(index, "description", e.target.value)
-              }
-            />
-            <label>Stands Limit</label>
-            <input
-              type="number"
-              min="1"
-              max={sumStands}
-              value={role.standsLimit}
-              onChange={(e) =>
-                handleCustomRoleChange(index, "standsLimit", e.target.value)
-              }
-            />
-          </div>
-        ))}
+    {customRoles
+  .map((role, realIndex) => ({ role, realIndex })) 
+  .filter(({ role }) => role.isCustom)
+  .map(({ role, realIndex }, displayIndex) => (
+    <div key={displayIndex}>
+      <label>Role Name</label>
+      <input
+        type="text"
+        value={role.name}
+        onChange={(e) =>
+          handleCustomRoleChange(realIndex, "name", e.target.value)
+        }
+      />
+      <label>Description</label>
+      <input
+        type="text"
+        value={role.description}
+        onChange={(e) =>
+          handleCustomRoleChange(realIndex, "description", e.target.value)
+        }
+      />
+      <label>Stands Limit</label>
+      <input
+        type="number"
+        min="1"
+        max={sumStands}
+        value={role.standsLimit}
+        onChange={(e) =>
+          handleCustomRoleChange(realIndex, "standsLimit", e.target.value)
+        }
+      />
+    </div>
+  ))}
+
 
       <button type="button" onClick={addCustomRole}>
         Add more roles

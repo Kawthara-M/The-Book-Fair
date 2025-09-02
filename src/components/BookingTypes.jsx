@@ -6,7 +6,6 @@ const BookingTypes = ({ booking, selectedStand, setSelectedStand, getStandFee })
   const [selectedType, setSelectedType] = useState("")
 
   useEffect(() => {
-    console.log("fetch halls again")
     const fetchStandTypes = async () => {
       try {
         const res = await User.get(`/fairs/${booking.fair._id}/halls`)
