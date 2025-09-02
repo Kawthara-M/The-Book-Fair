@@ -50,8 +50,7 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
   }
 
   const handlePredefinedChange = (name, field, value) => {
-   
-    // we receive name because we might have multipe roles that we can edit, field is thr porperty of this role to be edited
+
     setCustomRoles((prev, index) => {
       const existing = prev.find((role) => role.name === name)
       const updated = existing
@@ -72,7 +71,7 @@ const RequiredRoles = ({ sumStands, halls, handleRolesChange }) => {
     })
   }
 
-  // function to show new inputs when "add more" button is clicked
+
   const addCustomRole = () => {
 
     setCustomRoles((prev) => [

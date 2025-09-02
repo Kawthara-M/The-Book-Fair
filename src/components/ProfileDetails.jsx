@@ -29,21 +29,21 @@ const ProfileDetails = ({ view, setView }) => {
   useEffect(() => {
     const getTickets = async () => {
       const response = await User.get(`/tickets`)
-      const filledTickets = []
+      if (!response.data || !response.data.tickets) {
+        return
+      }
+      const filledTickets = response.data.tickets.map((ticket) => {
+        const fair = ticket.fair
+        const detailedTicket =
+          fair.tickets?.find((t) => t.type === ticket.type) || {}
 
-      for (const ticket of response.data) {
-        let fairId = ticket.fair._id
-        const fairResponse = await User.get(`/fairs/${fairId}`)
-        const fair = fairResponse.data
-        const detailedTicket = fair.tickets.find((t) => t.type === ticket.type)
-
-        filledTickets.push({
+        return {
           ...detailedTicket,
           ...ticket,
           fairId: fair._id,
           fairName: fair.name,
-        })
-      }
+        }
+      })
       setTickets(filledTickets)
     }
 
@@ -153,7 +153,7 @@ const ProfileDetails = ({ view, setView }) => {
                         return decodeURIComponent(fileName) // used to convert chracters back to how they are if they get url encoded
                       })()
                     : "No portfolio uploaded"}
-                </h4> 
+                </h4>
               </div>
               <div className="center-wrapper">
                 <button
@@ -170,7 +170,7 @@ const ProfileDetails = ({ view, setView }) => {
             </>
           ) : null}
 
-          {view === "portfolio-edit" && exhibitor? (
+          {view === "portfolio-edit" && exhibitor ? (
             <div className="portfolio-edit">
               <label>
                 C.R:
@@ -237,15 +237,17 @@ const ProfileDetails = ({ view, setView }) => {
 
           {view === "Profile-Tickets" ? (
             tickets && tickets.length > 0 ? (
-              tickets.map((ticket) => (
-                <BookedTicket
-                  key={ticket._id}
-                  ticket={ticket}
-                  removeTicket={removeTicket}
-                  setView={setView}
-                  setClickedTicket={setClickedTicket}
-                />
-              ))
+              tickets.map((ticket, index) => {
+                return (
+                  <BookedTicket
+                    key={index}
+                    ticket={ticket}
+                    removeTicket={removeTicket}
+                    setView={setView}
+                    setClickedTicket={setClickedTicket}
+                  />
+                )
+              })
             ) : (
               <div className="not-found">
                 {" "}

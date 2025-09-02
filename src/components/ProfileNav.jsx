@@ -1,13 +1,30 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { useUser } from "../context/UserContext"
 import { ThemeContext } from "../context/ThemeContext"
+import User from "../services/api"
 import themeIcon from "../assets/themeIcon.png"
 import logoutIcon from "../assets/logout.png"
+import deleteIcon from "../assets/delete.png"
 import "../../public/stylesheets/profile.css"
 
 const ProfileNav = ({ setView }) => {
   const { user, handleLogOut } = useUser()
   const { theme, toggleTheme } = useContext(ThemeContext)
+
+  const navigate = useNavigate()
+
+  const deleteAccount = async () => {
+    try {
+      await User.delete("auth/")
+      navigate("/auth")
+    } catch (error) {
+      console.error(
+        "Failed to delete account:",
+        error?.response?.data?.message || error.message || error
+      )
+    }
+  }
 
   return (
     <>
@@ -64,6 +81,16 @@ const ProfileNav = ({ setView }) => {
           <button onClick={() => handleLogOut()} className="icon-btn">
             <img src={logoutIcon} alt="Logout" className="icon" />
           </button>
+          {user.role === "Attendee" ? (
+            <button onClick={() => deleteAccount()} className="icon-btn">
+              <img
+                src={deleteIcon}
+                alt="Delete Account icon"
+                className="icon"
+                id="delete"
+              />
+            </button>
+          ) : null}
         </div>
       </div>
     </>

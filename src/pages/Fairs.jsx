@@ -31,7 +31,9 @@ const Fairs = () => {
   const filteredFairs = fairs.filter((fair) => {
     if (view === "ongoing") {
       if (user?.role === "Admin") {
-        if (fair.mainManager === user.id) {
+        console.log("user:,",user)
+        console.log(fair)
+        if (fair.mainManager?._id === user.id) {
           return fair.status === "ongoing"
         }
       } else {
@@ -75,7 +77,7 @@ const Fairs = () => {
         {view != "new" ? (
           filteredFairs.length > 0 ? (
             filteredFairs.map((fair) => (
-              <Fair key={fair.id} fair={fair} setView={setView} />
+              <Fair key={fair._id} fair={fair} setView={setView} />
             ))
           ) : (
             <div className="align-vertical">

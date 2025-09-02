@@ -12,7 +12,6 @@ const BookedTicket = ({ ticket, removeTicket, setView, setClickedTicket }) => {
   if (!ticketInfo) return null
 
   useEffect(() => {
-    //idk if this actually work
     const checkIfExpired = async () => {
       if (!ticketInfo?.endDate || ticketInfo.status === "expired") return
 

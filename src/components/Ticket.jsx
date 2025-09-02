@@ -31,16 +31,16 @@ const Ticket = ({
         ...ticket,
         status: "unpaid",
         fairName: fairName,
-        _id: response.data.ticket._id,
+        _id: response.data._id,
       })
 
       setView("payment")
     } catch (error) {
-      if (
+      let msg =
         error.response?.data?.msg ||
         error.response?.data?.error ||
         "Ticket wan't booked, try again later"
-      ) {
+      if (msg) {
         setErrorMsg(msg)
       }
     }
@@ -66,7 +66,10 @@ const Ticket = ({
           {errorMsg && <div className="ticket-error">{errorMsg}</div>}
           {(view && view === "Tickets") || view === "guest" ? (
             <div className="center-button">
-              <button disabled={!user || ticketAvailability === 0} onClick={() => postTicket()}>
+              <button
+                disabled={!user || ticketAvailability === 0}
+                onClick={() => postTicket()}
+              >
                 Book
               </button>
             </div>

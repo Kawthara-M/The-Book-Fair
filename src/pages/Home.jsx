@@ -1,6 +1,6 @@
 import "../../public/stylesheets/Home.css"
 import { useNavigate } from "react-router-dom"
-// import { DotLottieReact } from "@lottiefiles/dotlottie-react"
+
 const Home = () => {
   const navigate = useNavigate()
   return (
@@ -33,12 +33,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* <DotLottieReact
-      src="https://lottie.host/44585f85-6ff4-42c4-af8a-06f11b3cf601/Q6yXY3LTES.lottie"
-      loop
-      autoplay
-    /> */}
     </>
   )
 }

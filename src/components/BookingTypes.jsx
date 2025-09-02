@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import User from "../services/api"
 
+
+// This component was created to support booking edit, but is currently not being used
 const BookingTypes = ({ booking, selectedStand, setSelectedStand, getStandFee }) => {
   const [availableTypes, setAvailableTypes] = useState([])
   const [selectedType, setSelectedType] = useState("")
@@ -43,6 +45,7 @@ const BookingTypes = ({ booking, selectedStand, setSelectedStand, getStandFee })
       const bookingStands = await User.get(
         `bookings/${updatedBooking.data.booking._id}/stands`
       )
+
       setSelectedStand({
         type: newType,
         name: bookingStands.data.stands.stands[0].name,

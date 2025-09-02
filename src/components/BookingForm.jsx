@@ -1,9 +1,10 @@
 import User from "../services/api"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 const BookingForm = () => {
   const { fairId } = useParams()
+  const navigate = useNavigate()
   const [requirements, setRequirements] = useState({})
   const [standTypes, setStandTypes] = useState([])
   const [selectedRole, setSelectedRole] = useState("")
@@ -38,8 +39,9 @@ const BookingForm = () => {
         const groupedStands = Object.values(standMap)
 
         setRequirements({
-          exhibitorRoles: fairResponse.data.exhibitorRoles,
+          exhibitorRoles: fairResponse.data.fair.exhibitorRoles,
         })
+ 
 
         setStandTypes(groupedStands)
       } catch (error) {
@@ -68,6 +70,7 @@ const BookingForm = () => {
       setSelectedStandType("")
       setStandCount(1)
       setMessage("")
+      navigate("/fairs")
     } catch (error) {
       setMessage(error.response?.data?.error || "Booking failed.")
     }
@@ -137,7 +140,10 @@ const BookingForm = () => {
 
         <div className="center">
           <button
-            onClick={handleBooking}
+             onClick={(e) => {
+    e.preventDefault() 
+    handleBooking()
+  }}
             disabled={!selectedRole || !selectedStandType}
           >
             Submit Booking

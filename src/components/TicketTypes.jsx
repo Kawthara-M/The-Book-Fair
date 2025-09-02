@@ -7,9 +7,9 @@ const TicketTypes = ({ ticket, setTicketInfo }) => {
 
   useEffect(() => {
     const fetchTypes = async () => {
-      const res = await User.get(`/fairs/${ticket.fairId}`)
+      const res = await User.get(`/fairs/${ticket.fair._id}`)
       setTypes(
-        res.data.tickets.map((t) => ({
+        res.data.fair.tickets?.map((t) => ({
           type: t.type,
           fee: t.fee,
           startDate: t.startDate,
@@ -37,19 +37,21 @@ const TicketTypes = ({ ticket, setTicketInfo }) => {
         ...updatedDetails,
         type: newType,
       })
-
-      alert(`Ticket type updated to ${newType}!`)
     } catch (err) {
       console.error("Failed to update ticket", err)
     }
   }
 
   return (
-    <select value={selectedType} onChange={handleChange} className="select-type">
+    <select
+      value={selectedType}
+      onChange={handleChange}
+      className="select-type"
+    >
       <option value="" disabled>
         Select ticket type
       </option>
-      {types.map(({ type }) => (
+      {types?.map(({ type }) => (
         <option key={type} value={type}>
           {type}
         </option>

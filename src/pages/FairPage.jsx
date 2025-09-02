@@ -1,7 +1,6 @@
-import { useParams } from "react-router-dom"
-import { useUser } from "../context/UserContext"
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+import { useUser } from "../context/UserContext"
 import Ticket from "../components/Ticket"
 import BookingForm from "../components/BookingForm"
 import BookingRequest from "../components/BookingRequest"
@@ -10,47 +9,54 @@ import User from "../services/api"
 
 const FairPage = ({}) => {
   const { user } = useUser()
+  const { fairId } = useParams()
+  const navigate = useNavigate()
+
   const [fair, setFair] = useState(null)
   const [view, setView] = useState("")
   const [bookedTicket, setBookedTicket] = useState(null)
-  const navigate = useNavigate()
-
-  const { fairId } = useParams()
 
   useEffect(() => {
     const getFair = async () => {
-      const response = await User.get(`/fairs/${fairId}`)
-      setFair(response.data)
+      try {
+        const response = await User.get(`/fairs/${fairId}`)
+        const fetchedFair = response.data
+        setFair(fetchedFair.fair)
+        console.log("Fetched fair:", fetchedFair)
+
+        if (!user) {
+          setView("guest")
+          return
+        }
+
+        switch (user.role) {
+          case "Exhibitor":
+            setView("Booking")
+            break
+          case "Attendee":
+            setView("Tickets")
+            break
+          case "Admin":
+            switch (fetchedFair.fair.status) {
+              case "upcoming":
+                setView("editFair")
+                break
+              case "ongoing":
+                setView("ticketsSales")
+                break
+              case "openForBooking":
+                console.log(fetchedFair.status)
+                setView("bookingRequests")
+                break
+            }
+        }
+      } catch (error) {
+        console.error("Error fetching fair:", error)
+      }
     }
 
     getFair()
-  }, [fairId])
-
-  useEffect(() => {
-    if (!user || !fair) return
-
-    if (user.role === "Exhibitor") {
-      setView("Booking")
-    } else if (user.role === "Attendee") {
-      setView("Tickets")
-    } else if (user.role === "Admin") {
-      switch (fair.status) {
-        case "upcoming":
-          setView("editFair")
-          break
-        case "ongoing":
-          setView("ticketsSales")
-          break
-        case "openForBooking":
-          setView("bookingRequests")
-          break
-        default:
-          setView("guest")
-      }
-    } else {
-      setView("guest")
-    }
-  }, [user, fair])
+  }, [fairId, user])
 
   const updateStatus = async () => {
     const response = await User.put(`/fairs/update-status/${fair._id}`)
@@ -61,7 +67,7 @@ const FairPage = ({}) => {
 
   const cancelFair = async () => {
     const response = await User.put(`/fairs/cancel-fair/${fairId}`)
-     setTimeout(() => {
+    setTimeout(() => {
       navigate("/fairs")
     }, 1000)
   }
@@ -87,7 +93,6 @@ const FairPage = ({}) => {
                 <p>{fair?.address}</p>
               </div>
             </div>
-            {/* <div className="fair-options"> */}
             {(view === "Tickets" || view === "guest") &&
             fair.tickets?.length > 0 ? (
               <div className="fair-options">
@@ -127,10 +132,16 @@ const FairPage = ({}) => {
             ) : null}
             {view === "editFair" ? (
               <div className="edit-fair">
-                <button id="cancel-button" onClick= {()=> {
-                  cancelFair()
-                }}>✗</button>
-                <button id="activate-button"
+                <button
+                  id="cancel-button"
+                  onClick={() => {
+                    cancelFair()
+                  }}
+                >
+                  ✗
+                </button>
+                <button
+                  id="activate-button"
                   onClick={() => {
                     updateStatus()
                   }}
@@ -139,7 +150,6 @@ const FairPage = ({}) => {
                 </button>
               </div>
             ) : null}
-            {/* </div> */}
           </>
         ) : (
           <div className="center">
