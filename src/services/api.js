@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-export const BASE_URL = 'https://the-book-fair.surge.sh'
+export const BASE_URL = 'https://the-book-fair.onrender.com'
 
 const User = Axios.create({ baseURL: BASE_URL })
 
