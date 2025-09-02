@@ -24,7 +24,7 @@ const StandTypes = ({ stands, onStandChange, onStandsCountChange }) => {
             name="standPrice"
             value={stand.price}
             min ="0"
-            onChange={(e) => onStandChange(idx, "price", e.target.value)}
+            onChange={(e) => onStandChange(idx, "fee", e.target.value)}
           />
           <label htmlFor="availability">Availability</label>
           <input

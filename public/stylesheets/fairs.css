@@ -125,14 +125,16 @@
   width: 100%;
 }
 
+.fair-booking h1 {
+  margin-top: 2rem;
+}
+
 .booking-form {
   margin: 0;
   padding-top: 0.5rem;
   max-width: 400px;
 }
-.booking-form h1 {
-  margin-top: 0;
-}
+
 
 .ticket {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
@@ -254,12 +256,18 @@ h2 {
 }
 
 .edit-fair {
+  display: flex;
+  flex-direction: column;
   height: auto;
-  width: 18%;
+  width: 17%;
+  row-gap: .6rem;
   padding: 0;
 }
-.edit-fair button {
-  height: 100%;
+#cancel-button {
+  height: 20%;
+}
+#activate-button {
+  height:80%;
 }
 .description {
   margin-left: 4px;
@@ -281,6 +289,7 @@ h2 {
 }
 
 .align-vertical {
+max-height:300px;
   display: flex;
   flex-direction: column;
   justify-content: center;

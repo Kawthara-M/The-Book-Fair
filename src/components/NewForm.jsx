@@ -58,6 +58,7 @@ const NewForm = ({ direct }) => {
     const updatedHalls = [...formValues.halls]
     updatedHalls[hallIndex].stands[standIndex][field] = value
     setFormValues({ ...formValues, halls: updatedHalls })
+    console.log(formValues.halls)
   }
 
   const handleStandsCountChange = (hallIndex, count) => {
@@ -68,7 +69,7 @@ const NewForm = ({ direct }) => {
         ? Array.from(
             { length: count },
             (_, i) =>
-              currentStands[i] || { type: "", price: "", availability: "" }
+              currentStands[i] || { type: "", fee: "", availability: "" }
           )
         : []
     setFormValues({ ...formValues, halls: updatedHalls })
@@ -123,7 +124,7 @@ const NewForm = ({ direct }) => {
 
   return (
     <div className="new">
-                  <h2>New Fair Details</h2>
+      <h2>New Fair Details</h2>
 
       <form className="new-form-panel" onSubmit={handleSubmit}>
         {view === 0 && (
@@ -143,8 +144,10 @@ const NewForm = ({ direct }) => {
               onChange={handleChange}
             />
             <label>Description</label>
-            <input
+            <textarea
               type="text"
+              cols="53"
+              rows="5"
               name="description"
               value={formValues.description}
               onChange={handleChange}
@@ -211,24 +214,26 @@ const NewForm = ({ direct }) => {
                 />
               </div>
             ))}
-            <button type="button" onClick={() => setView(view - 1)}>
-              Back
-            </button>
-            <button
-              type="button"
-              onClick={() => setView(view + 1)}
-              disabled={formValues.halls.some(
-                (hall) =>
-                  !hall.name ||
-                  hall.stands.length === 0 ||
-                  hall.stands.some(
-                    (stand) =>
-                      !stand.type || !stand.price || !stand.availability
-                  )
-              )}
-            >
-              Continue
-            </button>
+            <div className="hall-buttons">
+              <button type="button" onClick={() => setView(view - 1)}>
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={() => setView(view + 1)}
+                disabled={formValues.halls.some(
+                  (hall) =>
+                    !hall.name ||
+                    hall.stands.length === 0 ||
+                    hall.stands.some(
+                      (stand) =>
+                        !stand.type || !stand.fee || !stand.availability
+                    )
+                )}
+              >
+                Continue
+              </button>
+            </div>
           </>
         )}
 

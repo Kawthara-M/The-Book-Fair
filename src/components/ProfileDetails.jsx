@@ -170,7 +170,7 @@ const ProfileDetails = ({ view, setView }) => {
             </>
           ) : null}
 
-          {view === "portfolio-edit" ? (
+          {view === "portfolio-edit" && exhibitor? (
             <div className="portfolio-edit">
               <label>
                 C.R:

@@ -52,6 +52,9 @@ const Fairs = () => {
       return fair.status === "openForBooking" || fair.status === "ongoing"
     }
   })
+  if (filteredFairs) {
+    console.log(filteredFairs)
+  }
 
   return (
     <div className="fairs-page-wrapper">
@@ -83,12 +86,13 @@ const Fairs = () => {
             <div className="align-vertical">
               {" "}
               <DotLottieReact
-                className="books-loader"
                 src="https://lottie.host/44585f85-6ff4-42c4-af8a-06f11b3cf601/Q6yXY3LTES.lottie"
                 loop
                 autoplay
               />{" "}
-              {"No Fairs"}{" "}
+              {`No ${
+                view === "ongoing" || view === "upcoming" ? view : view==="openForBooking" ? "Open For Booking" : null
+              } Fairs`}{" "}
             </div>
           )
         ) : null}

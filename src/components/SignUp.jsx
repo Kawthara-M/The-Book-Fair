@@ -131,6 +131,7 @@ const SignUp = () => {
           <div className="name-row">
             <label>
               Name
+            </label>
               <input
                 type="text"
                 name="name"
@@ -139,7 +140,6 @@ const SignUp = () => {
                 value={formValues.name}
                 required
               />
-            </label>
           </div>
           <label htmlFor="email">Email</label>
           <input

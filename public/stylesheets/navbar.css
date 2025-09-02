@@ -76,5 +76,5 @@ img.icon {
 }
 
 .profile-icon {
-  filter: drop-shadow(0 0 0.75rem var(--icon-shadow));
+  filter: drop-shadow(0 1rem 1rem var(--icon-shadow));
 }

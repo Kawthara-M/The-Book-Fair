@@ -8,7 +8,7 @@ import BookingRequest from "../components/BookingRequest"
 import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 import User from "../services/api"
 
-const FairPage = () => {
+const FairPage = ({}) => {
   const { user } = useUser()
   const [fair, setFair] = useState(null)
   const [view, setView] = useState("")
@@ -53,8 +53,15 @@ const FairPage = () => {
   }, [user, fair])
 
   const updateStatus = async () => {
-    const response = await User.put(`fairs/update-status/${fair._id}`)
+    const response = await User.put(`/fairs/update-status/${fair._id}`)
     setTimeout(() => {
+      navigate("/fairs")
+    }, 1000)
+  }
+
+  const cancelFair = async () => {
+    const response = await User.put(`/fairs/cancel-fair/${fairId}`)
+     setTimeout(() => {
       navigate("/fairs")
     }, 1000)
   }
@@ -120,7 +127,10 @@ const FairPage = () => {
             ) : null}
             {view === "editFair" ? (
               <div className="edit-fair">
-                <button
+                <button id="cancel-button" onClick= {()=> {
+                  cancelFair()
+                }}>✗</button>
+                <button id="activate-button"
                   onClick={() => {
                     updateStatus()
                   }}

@@ -9,9 +9,9 @@ const Fair = ({ fair, setView }) => {
   const getButtonContent = (status) => {
     switch (status) {
       case "openForBooking":
-        return "Participate!"
+        return "Participate"
       case "ongoing":
-        return "Book Tickets!"
+        return "Book Tickets"
       default:
         return null
     }
@@ -21,22 +21,21 @@ const Fair = ({ fair, setView }) => {
       case "Admin":
         if (fair?.status === "upcoming") return "Manage Fair"
         else if (fair?.status === "ongoing") return "View Sold Tickets"
-        else if (fair?.status === "openForBooking")
-          return "Exhibitors"
+        else if (fair?.status === "openForBooking") return "Exhibitors"
       case "Attendee":
-        return "Book Tickets!"
+        return "Book Tickets"
       case "Exhibitor":
-        return "Participate!"
+        return "Participate"
       default:
         return null
     }
   }
 
-  const updateStatus = async() => {
+  const updateStatus = async () => {
     await User.put(`/fairs/update-status/${fair._id}`)
-    setTimeout(()=>{
+    setTimeout(() => {
       setView("ongoing")
-    },1000)
+    }, 1000)
   }
 
   return (
@@ -69,11 +68,15 @@ const Fair = ({ fair, setView }) => {
                 >
                   {getLoggedInButtonContent()}
                 </button>
-                {fair.status === "openForBooking" ? (
-                  <button onClick={()=>{updateStatus()}}>Activate Fair</button>
-                ) : (
-                  null
-                )}
+                {fair.status === "openForBooking" && user?.role==="Admin" ? (
+                  <button
+                    onClick={() => {
+                      updateStatus()
+                    }}
+                  >
+                    Activate Fair
+                  </button>
+                ) : null}
               </div>
             )}
           </div>

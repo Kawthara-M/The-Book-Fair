@@ -42,6 +42,7 @@ const BookingForm = () => {
         })
 
         setStandTypes(groupedStands)
+        console.log(groupedStands)
       } catch (error) {
         console.error("Error fetching data:", error)
       }

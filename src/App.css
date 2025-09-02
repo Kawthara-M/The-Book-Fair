@@ -5,24 +5,26 @@ body.dark {
   --nav-bg: #1f1f1f;
   --card-bg: #242424;
   --form-color: #2a2a2a;
-  --btn-bg: #f6e3da;
-  --btn-color: black;
+  --btn-bg: #960704;
+  --btn-color: #f1f1f1;
   --a-color: #ecdfcc;
   --label-color: #f3e6e6;
-  --accent-color: rgb(64, 23, 23);
-  --icon-shadow:#fff2eb;
+  --accent-color: rgb(147, 2, 2);
+  --icon-shadow: #fff2eb;
+  --input-bg: #dcdbdb;
 }
 body.light {
-  --bg-color: #f1f1f1;
-  --footer-bg: #f1f1f1;
+  --bg-color: #f7ede2;
+  --footer-bg: #f7ede2;
   --text-color: rgb(39, 38, 38);
-  --nav-bg: #f1f1f1;
+  --nav-bg: #f7ede2;
   --card-bg: #fff2eb;
   --form-color: transparent;
   --btn-bg: #4e0202;
   --btn-color: white;
   --accent-color: rgb(64, 23, 23);
-  --icon-shadow:#4e0202;
+  --icon-shadow: #4e0202;
+  --input-bg: #ffffff;
 }
 
 body {
@@ -39,7 +41,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  width:100vw;
+  width: 100vw;
   margin: 0;
   overflow-y: auto;
 }
@@ -94,9 +96,17 @@ button:hover {
   }
 }
 
-input[type="text"],
+
 input [type="radio"] {
   border: 1px solid var(--text-color);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="email"] {
+  background-color: var(--input-bg);
+  padding: 0 1rem;
 }
 
 button:disabled {
@@ -110,6 +120,19 @@ button:disabled {
   justify-content: center;
   align-items: center;
   height: 50%;
-  width: 50%;;
+  width: 50%;
   margin: auto;
+}
+
+h1,
+h2 {
+  color: var(--accent-color);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: left;
 }
