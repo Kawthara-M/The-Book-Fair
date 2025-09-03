@@ -21,6 +21,7 @@
   padding-top: 1rem;
   margin-left: 0;
   min-width: 350px;
+  height: 100%;
 }
 
 .payment-header {
@@ -38,7 +39,7 @@
 }
 .form-actions {
   display: flex;
-  gap:1rem;
+  gap: 1rem;
 }
 #later-button {
   opacity: 0.8;

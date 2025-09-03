@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import login from "../assets/login.jpg"
+import "../../public/stylesheets/auth.css"
 
 const Authentication = () => {
   const navigate = useNavigate()

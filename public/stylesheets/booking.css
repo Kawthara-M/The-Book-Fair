@@ -66,3 +66,11 @@
   margin: 2rem 1rem 0 0;
   border-radius: 10px;
 }
+
+form.booking-form {
+  height:100%;
+  margin: auto;
+  padding-top: 0.5rem;
+  max-width: 400px;
+  box-shadow: none !important;
+}

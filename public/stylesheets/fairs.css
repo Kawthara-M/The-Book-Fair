@@ -110,30 +110,34 @@
   border-radius: 12px;
   overflow-y: auto;
   width: 80%;
-  height: 80%;
-  max-width: 600px;
+  height: 100%;
+  max-width: 650px;
   max-height: 400px;
   padding: 0;
   background-color: var(--card-bg);
 }
 .fair-description {
-  height: 100%;
   margin: 0;
   align-items: center;
   padding: 1rem;
   margin-right: 0.8rem;
   border-radius: 10px;
-  width: 100%;
+  width: 50%;
+  height:auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .fair-options {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: auto;
+  overflow-y: auto;
 }
 .fair-booking {
   margin: 0;
   padding: 0;
   min-width: 400px;
+  height:100%;
   width: 100%;
 }
 
@@ -141,17 +145,11 @@
   margin-top: 2rem;
 }
 
-.booking-form {
-  margin: 0;
-  padding-top: 0.5rem;
-  max-width: 400px;
-}
-
 .ticket {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   min-width: 350px;
   border-radius: 5px;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1.5rem;
   margin: 1rem;
 }
 .ticket button {
@@ -238,9 +236,6 @@ input {
 input[type="radio"] {
   height: 1rem;
   width: 1rem;
-}
-input[type="number"] {
-  max-width: 300px;
 }
 
 .line {
@@ -337,4 +332,9 @@ h2 {
   margin: 0.8rem 0;
   text-align: center;
   display: block;
+}
+
+.payment-header + form {
+  box-shadow: none;
+  margin-left: 0;
 }

@@ -1,4 +1,3 @@
-
 .section {
   padding: 4rem 2rem;
   background-color: var(--bg-color);
@@ -38,6 +37,9 @@
   display: inline-block;
   cursor: pointer;
 }
+a.btn:hover {
+  color: var(--btn-color) !important;
+}
 
 .btn.secondary {
   background-color: transparent;
@@ -49,4 +51,3 @@
   background-color: var(--btn-bg);
   color: white;
 }
-
