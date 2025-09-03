@@ -11,6 +11,16 @@
   background: var(--card-bg);
 }
 
+@media (max-width: 768px) {
+  .booking{
+    width:80%;
+  }
+  .booking h1 {
+    font-size: 1.5rem;
+  }
+
+}
+
 .booking-header {
   display: flex;
   justify-content: space-between;

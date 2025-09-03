@@ -102,16 +102,7 @@ const NewForm = ({ direct }) => {
     e.preventDefault()
 
     try {
-   console.log("Form Values:", formValues)
-console.log("Fair Start Date:", new Date(formValues.startDate))
-console.log("Fair End Date:", new Date(formValues.endDate))
-console.log("Ticket Start Date:", new Date(formValues.tickets[0]?.startDate))
-console.log("Ticket End Date:", new Date(formValues.tickets[0]?.endDate))
-
-      const response = await User.post(
-        "/fairs/",
-        formValues
-      )
+      const response = await User.post("/fairs/", formValues)
       if (!response || !response.data || response.status !== 201) {
         setError("Server did not return a valid response.")
         return

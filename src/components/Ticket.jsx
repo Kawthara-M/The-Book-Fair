@@ -11,6 +11,7 @@ const Ticket = ({
   setView,
   setBookedTicket,
   bookedTicket,
+  newView,
 }) => {
   const { user } = useUser()
 
@@ -77,7 +78,11 @@ const Ticket = ({
         </div>
       ) : null}
       {view === "payment" && bookedTicket ? (
-        <Payment bookedTicket={bookedTicket} setView={setView} />
+        <Payment
+          bookedTicket={bookedTicket}
+          setView={setView}
+          newView={newView}
+        />
       ) : null}
     </>
   )

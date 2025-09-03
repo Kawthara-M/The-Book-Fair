@@ -41,7 +41,6 @@ const BookingForm = () => {
         setRequirements({
           exhibitorRoles: fairResponse.data.fair.exhibitorRoles,
         })
- 
 
         setStandTypes(groupedStands)
       } catch (error) {
@@ -140,10 +139,10 @@ const BookingForm = () => {
 
         <div className="center">
           <button
-             onClick={(e) => {
-    e.preventDefault() 
-    handleBooking()
-  }}
+            onClick={(e) => {
+              e.preventDefault()
+              handleBooking()
+            }}
             disabled={!selectedRole || !selectedStandType}
           >
             Submit Booking

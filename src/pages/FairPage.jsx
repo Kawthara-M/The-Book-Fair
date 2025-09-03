@@ -22,7 +22,6 @@ const FairPage = ({}) => {
         const response = await User.get(`/fairs/${fairId}`)
         const fetchedFair = response.data
         setFair(fetchedFair.fair)
-        console.log("Fetched fair:", fetchedFair)
 
         if (!user) {
           setView("guest")
@@ -45,7 +44,6 @@ const FairPage = ({}) => {
                 setView("ticketsSales")
                 break
               case "openForBooking":
-                console.log(fetchedFair.status)
                 setView("bookingRequests")
                 break
             }
@@ -103,6 +101,7 @@ const FairPage = ({}) => {
                     fairId={fair._id}
                     fairName={fair.name}
                     view={view}
+                    newView={"Tickets"}
                     setBookedTicket={setBookedTicket}
                     setView={setView}
                   />

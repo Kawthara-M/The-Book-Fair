@@ -72,6 +72,9 @@ const BookedTicket = ({ ticket, removeTicket, setView, setClickedTicket }) => {
           </div>
         </>
       )}
+      {ticket.status === "expired" ? (
+        <p id="expired">{ticketInfo.status}</p>
+      ) : null}
     </div>
   )
 }

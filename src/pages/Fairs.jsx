@@ -10,7 +10,7 @@ import "../../public/stylesheets/fairs.css"
 const Fairs = () => {
   const { user } = useUser()
   const [fairs, setFairs] = useState([])
-  const [view, setView] = useState("upcoming")
+  const [view, setView] = useState("ongoing")
 
   useEffect(() => {
     const getFairs = async () => {
@@ -31,8 +31,6 @@ const Fairs = () => {
   const filteredFairs = fairs.filter((fair) => {
     if (view === "ongoing") {
       if (user?.role === "Admin") {
-        console.log("user:,",user)
-        console.log(fair)
         if (fair.mainManager?._id === user.id) {
           return fair.status === "ongoing"
         }
@@ -70,7 +68,7 @@ const Fairs = () => {
           <>
             {" "}
             <NewForm direct={setView} />
-            <div>{/* this empty comment is for flex thing in style */}</div>
+            <div></div>
           </>
         ) : null}
 
@@ -88,7 +86,13 @@ const Fairs = () => {
                 autoplay
               />{" "}
               {`No ${
-                view === "ongoing" || view === "upcoming" ? view : view==="openForBooking" ? "Open For Booking" : view==="guest" ? "ongoing" : null
+                view === "ongoing" || view === "upcoming"
+                  ? view
+                  : view === "openForBooking"
+                  ? "Open For Booking"
+                  : view === "guest"
+                  ? "ongoing"
+                  : null
               } Fairs`}{" "}
             </div>
           )

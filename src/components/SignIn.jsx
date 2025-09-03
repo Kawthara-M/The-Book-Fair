@@ -41,9 +41,11 @@ const SignIn = () => {
         <img src={`${login}`} alt="Book Fair" />
       </div>
       <div className="sign-in-panel">
-        <div className="welcome-back"><h2>Welcome Back</h2>
-        <p>Fulfill your information to continue</p></div>
-        
+        <div className="welcome-back">
+          <h2>Welcome Back</h2>
+          <p>Fulfill your information to continue</p>
+        </div>
+
         <form onSubmit={handleSubmit} className="sign-in-form">
           <label htmlFor="email">Email</label>
           <input
@@ -57,7 +59,6 @@ const SignIn = () => {
           />
 
           <label htmlFor="password">Password</label>
-          {/* Changed type to password and fixed id */}
           <input
             type="password"
             id="password"

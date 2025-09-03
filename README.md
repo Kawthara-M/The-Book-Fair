@@ -1,6 +1,6 @@
 <h1>
   <img src="src/assets/Books.gif"  width="30" height="30"  alt ="STACK OF BOOKS gif"style="vertical-align:middle; ">
-  Cat-ch It!
+  The Book Fair
 </h1>
 
 **Developer**  [Kawthar Mohammad](https://github.com/Kawthara-M) <br>
@@ -24,7 +24,7 @@ A first step for this project to see the light was planning, a critical stage to
 - **To Do List**: A board to list tasks and track prograss.
   | [Notion]() |
 
-- **Backend Repository**: GitHub repository for The Book Fair backend | [GitHub](https://github.com/Kawthara-M/Fair-y-backend) |
+- **Backend Repository**: GitHub repository for The Book Fair backend | [GitHub](https://github.com/Kawthara-M/The-Book-Fair-Backend) |
 
 Following the planning, the development has mainly resulted in 2 main outcomes, a front-end and a backend developed and connected using the MERN Stack (MongoDB, Express, React, Node.js). <br>
 

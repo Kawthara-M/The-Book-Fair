@@ -226,7 +226,6 @@ button {
   }
   .sign-in-panel {
     gap: 0;
-
     padding-right: 0;
     margin-bottom: 0.5rem;
   }
@@ -257,6 +256,15 @@ button {
   .phone-code {
     width: 100%;
     margin-bottom: 0.5rem;
+  }
+  .fair-description {
+    width: 33% !important;
+  }
+  .fair-description h1 {
+    font-size: 1.5rem;
+  }
+  .fair {
+    width: 35% !important;
   }
 }
 

@@ -89,7 +89,7 @@ const Payment = ({ bookedTicket, setView, fairName, newView }) => {
                 <h3>Ticket Type: {bookedTicket.type}</h3>
                 <h3>Price: {bookedTicket.fee} BD</h3>
               </div>
-              <form onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit}>
                 {submitError && (
                   <div className="submit-error">{submitError}</div>
                 )}

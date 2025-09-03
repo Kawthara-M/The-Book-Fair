@@ -42,7 +42,6 @@ const Fair = ({ fair, setView }) => {
     <>
       {
         <div className="fair">
-          {/* <img src="#" alt={`${fair.name}`} id="fair-img" /> */}
           <h2>{fair.name}</h2>
           <div className="guest-div">
             <p>{fair.description}</p>
@@ -68,7 +67,7 @@ const Fair = ({ fair, setView }) => {
                 >
                   {getLoggedInButtonContent()}
                 </button>
-                {fair.status === "openForBooking" && user?.role==="Admin" ? (
+                {fair.status === "openForBooking" && user?.role === "Admin" ? (
                   <button
                     onClick={() => {
                       updateStatus()
