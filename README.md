@@ -4,7 +4,7 @@
 </h1>
 
 **Developer**  [Kawthar Mohammad](https://github.com/Kawthara-M) <br>
-**Deployed Version** [The Book Fair](the-book-fair.surge.sh)
+**Deployed Version** [The Book Fair](https://the-book-fair.surge.sh/)
 
 ## 📌 Description
 The Book Fair, a fairs management system developed to facilitate the process of managing book fairs in terms of finding participants and offering tickets. The platform is built with MERN stack and has three interfaces, one for the admin to manage fairs, another for attendees to book tickets for active fairs, and the last for exhibitors who wish to participate in fairs.
