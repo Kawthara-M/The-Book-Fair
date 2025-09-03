@@ -112,19 +112,20 @@
   overflow-y: auto;
   width: 80%;
   height: 100%;
-  max-width: 800px;
+  max-width: 600px;
   max-height: 400px;
   padding: 0;
   background-color: var(--card-bg);
 }
 .fair-description {
+  flex:1;
   position: sticky;
   margin: 0;
   align-items: center;
   padding: 1rem;
   margin-right: 0.8rem;
   border-radius: 10px;
-  width: 40%;
+  width: 100%;
   height: fit-content;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -290,7 +291,7 @@ h2 {
   height: 20%;
 }
 #activate-button {
-  height: 80%;
+  height: 100%;
 }
 .description {
   margin-left: 4px;
